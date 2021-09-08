@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RepositoryLayer.RepositoryPattern
 {
-    public class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T :BaseEntity
     {
 
         private readonly AppDbContext _appDbContext;
@@ -19,6 +19,17 @@ namespace RepositoryLayer.RepositoryPattern
             _entities = _appDbContext.Set<T>();
         }
 
+        public async Task<bool> Update(T entity)
+        {
+            if(entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            _entities.Update(entity);
+            await _appDbContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> Exists(int Id)
         {
             var result = await _entities.FirstOrDefaultAsync(x => Id == x.Id);
@@ -27,14 +38,32 @@ namespace RepositoryLayer.RepositoryPattern
             return false;
         }
 
-        public void Insert(T entity)
+        public async Task<bool> Insert(T entity)
         {
             if(entity == null)
             {
                 throw new ArgumentNullException("entity");
             }
-            _entities.Add(entity);
-            _appDbContext.SaveChanges();
+            await _entities.AddAsync(entity);
+            await _appDbContext.SaveChangesAsync();
+            return true;
         }
+
+        public void Delete(T entity)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("entity");
+            }
+            _entities.Remove(entity);
+        }
+
+        public T Get(int Id)
+        {
+            var entity =  _entities.Where(x => x.Id == Id).FirstOrDefault();
+            return entity;
+        }
+
+        
     }
 }

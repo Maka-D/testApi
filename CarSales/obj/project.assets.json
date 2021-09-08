@@ -1611,6 +1611,20 @@
         "runtime": {
           "bin/placeholder/RepositoryLayer.dll": {}
         }
+      },
+      "ServicesLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DomainLayer": "1.0.0",
+          "RepositoryLayer": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ServicesLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ServicesLayer.dll": {}
+        }
       }
     }
   },
@@ -5972,6 +5986,11 @@
       "type": "project",
       "path": "../RepositoryLayer/RepositoryLayer.csproj",
       "msbuildProject": "../RepositoryLayer/RepositoryLayer.csproj"
+    },
+    "ServicesLayer/1.0.0": {
+      "type": "project",
+      "path": "../ServicesLayer/ServicesLayer.csproj",
+      "msbuildProject": "../ServicesLayer/ServicesLayer.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5979,6 +5998,7 @@
       "Microsoft.EntityFrameworkCore >= 5.0.9",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.9",
       "RepositoryLayer >= 1.0.0",
+      "ServicesLayer >= 1.0.0",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
@@ -6011,6 +6031,9 @@
           "projectReferences": {
             "D:\\testApi\\RepositoryLayer\\RepositoryLayer.csproj": {
               "projectPath": "D:\\testApi\\RepositoryLayer\\RepositoryLayer.csproj"
+            },
+            "D:\\testApi\\ServicesLayer\\ServicesLayer.csproj": {
+              "projectPath": "D:\\testApi\\ServicesLayer\\ServicesLayer.csproj"
             }
           }
         }

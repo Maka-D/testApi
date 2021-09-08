@@ -1,5 +1,7 @@
 ﻿using DomainLayer.Models;
+using RepositoryLayer;
 using RepositoryLayer.RepositoryPattern;
+using ServicesLayer.CustomExceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +22,14 @@ namespace ServicesLayer.ClientService
         {
             if (await _repository.Exists(client.Id))
             {
-               
+                throw new ClientAlreadyExistsException("Coudn't register the client!");
             }
-            _repository.Insert(client);
+            await _repository.Insert(client);
         }
 
-       
+        //public async Task<Client> FindClient(string IdenNum)
+        //{
+            
+        //}
     }
 }

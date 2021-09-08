@@ -9,6 +9,7 @@ namespace ServicesLayer.ClientService
 {
     public interface IClientService
     {
-         void AddClient(Client client);
+        void AddClient(Client client);
+        //Task<Client> FindClient(string IdenNum);
     }
 }

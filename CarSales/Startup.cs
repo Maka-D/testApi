@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RepositoryLayer;
 using RepositoryLayer.RepositoryPattern;
+using ServicesLayer.ClientService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,7 @@ namespace CarSales
 
             #region Add Services
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IClientService, ClientService>();
             #endregion
         }
 
