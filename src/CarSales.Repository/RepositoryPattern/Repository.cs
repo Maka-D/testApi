@@ -84,11 +84,11 @@ namespace CarSales.Repository.RepositoryPattern
              
         }
 
-        public async Task<T> Get(int Id)
-        {
-            var entity = await _entities.Where(x => x.Id == Id).FirstOrDefaultAsync();
-            return entity;
-        }
+        //public async Task<T> Get(int Id)
+        //{
+        //    var entity = await _entities.Where(x => x.Id == Id).FirstOrDefaultAsync();
+        //    return entity;
+        //}
 
         //public async Task<List<T>> GetAll()
         //{

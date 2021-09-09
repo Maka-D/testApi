@@ -12,7 +12,7 @@ namespace CarSales.Repository.RepositoryPattern
         Task<T> Insert(T entity);
         Task<bool> Update(T entity);
         void Delete(T entity);
-        Task<T> Get(int Id);
+        //Task<T> Get(int Id);
         //Task<List<T>> GetAll();
     }
 }
