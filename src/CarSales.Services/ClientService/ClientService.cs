@@ -38,11 +38,15 @@ namespace CarSales.Services.ClientService
             return await _repository.Insert(_mapper.Map<Client>(client));
         }
 
-        public async Task UpdateClient(Client client)
+        public async Task UpdateClient(ClientInput client)
         {
             if (client == null)
             {
                 throw new ArgumentNullException("client");
+            }
+            else if (! await ClientExists(client.IdentityNumber))
+            {
+                throw new ClientDoesNotExistsException();
             }
             await _repository.Update(_mapper.Map<Client>(client));
         }
@@ -59,6 +63,12 @@ namespace CarSales.Services.ClientService
                 throw new ClientDoesNotExistsException();
             }
             return client;
+        }
+
+        public async Task DeleteClient(string IdenNum)
+        {
+            var client = await GetClient(IdenNum);
+             _repository.Delete(client);
         }
 
 

@@ -1,4 +1,5 @@
-﻿using CarSales.Services.ClientService;
+﻿using CarSales.Domain.Models;
+using CarSales.Services.ClientService;
 using CarSales.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -37,6 +38,33 @@ namespace CarSales.Controllers
             return CreatedAtAction(nameof(GetClient), new { Id = createdClient.Id, createdClient });
         }
 
+        [HttpPut]
+        public async Task<ActionResult> EditClient(ClientInput client)
+        {
+            if (ModelState.IsValid)
+            {
+                await _clientService.UpdateClient(client);
+                return Ok();
+            }
+            return BadRequest();
+
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteClient(string IdentityNumber)
+        {
+            try
+            {
+                await _clientService.DeleteClient(IdentityNumber);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(" {0} " ,ex);
+                return BadRequest();
+            }
+            
+        }
        
     }
 }

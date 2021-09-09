@@ -11,10 +11,9 @@ namespace CarSales.Services.ClientService
     public interface IClientService
     {
         Task<Client> AddClient(ClientInput client);
-        Task UpdateClient(Client client);
+        Task UpdateClient(ClientInput client);
         Task<Client> GetClient(string IdentityNum);
+        Task DeleteClient(string IdenNum);
 
-
-        //Task<Client> FindClient(string IdenNum);
     }
 }

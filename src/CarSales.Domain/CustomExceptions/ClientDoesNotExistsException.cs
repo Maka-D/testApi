@@ -8,7 +8,7 @@ namespace CarSales.Domain.CustomExceptions
 {
     public class ClientDoesNotExistsException : Exception
     {
-        public ClientDoesNotExistsException() : base("Coudn't find the client with this Identity Number!")
+        public ClientDoesNotExistsException() : base()
         {
 
         }
