@@ -28,7 +28,6 @@ namespace CarSales
 
             try
             {
-                Log.Information("Application starting up!");
                 CreateHostBuilder(args).Build().Run();
             }
             catch(Exception ex)

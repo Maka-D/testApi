@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CarSales.Repository
@@ -21,6 +22,14 @@ namespace CarSales.Repository
             modelBuilder.ApplyConfiguration(new ClientMap());
 
             modelBuilder.ApplyConfiguration(new CarMap());
+
+            modelBuilder.Entity<Client>()
+                .HasIndex(x => x.IdentityNumber)
+                .IsUnique();
+
+            modelBuilder.Entity<Car>()
+                .HasIndex(x => x.VinCode)
+                .IsUnique();
 
             base.OnModelCreating(modelBuilder);
         }

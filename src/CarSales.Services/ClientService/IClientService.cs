@@ -12,7 +12,7 @@ namespace CarSales.Services.ClientService
     {
         Task<Client> AddClient(ClientInput client);
         Task UpdateClient(ClientInput client);
-        Task<Client> GetClient(string IdentityNum);
+        Task<Client> FindClient(string IdentityNum);
         Task DeleteClient(string IdenNum);
 
     }

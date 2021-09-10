@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class CarDoesNotExistsException :Exception
+    public class CouldNotBuyCarException :Exception
     {
-        public CarDoesNotExistsException() : base()
+        public CouldNotBuyCarException() : base()
         {
 
         }

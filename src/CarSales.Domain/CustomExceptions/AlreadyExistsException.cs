@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class CarAlreadyExistsException : Exception
+    public class AlreadyExistsException : Exception
     {
-        public CarAlreadyExistsException() : base()
+        public AlreadyExistsException() : base()
+        {
+
+        }
+
+        public AlreadyExistsException(string message) : base(message)
         {
 
         }

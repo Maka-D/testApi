@@ -27,7 +27,7 @@ namespace CarSales.Controllers
         [HttpGet]
         public async Task<IActionResult> GetClient(string IdentityNumber)
         {
-            var client = await _clientService.GetClient(IdentityNumber);
+            var client = await _clientService.FindClient(IdentityNumber);
             return Ok(client);
         }
 

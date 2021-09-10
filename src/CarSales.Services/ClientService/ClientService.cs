@@ -3,6 +3,7 @@ using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Repository;
 using CarSales.Repository.RepositoryPattern;
+using CarSales.Repository.RepositoryPattern.ClientRepository;
 using CarSales.Services.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,14 +16,12 @@ namespace CarSales.Services.ClientService
 {
     public class ClientService : IClientService
     {
-        private readonly IRepository<Client> _repository;
-        private readonly AppDbContext _appDbContext;
+        private readonly IClientRepository _clientRepo;
         private readonly IMapper _mapper;
 
-        public ClientService(IRepository<Client> repository, IMapper mapper, AppDbContext appDbContext)
+        public ClientService(IMapper mapper, IClientRepository clientRepo)
         {
-            _repository = repository;
-            _appDbContext = appDbContext;
+            _clientRepo = clientRepo;
             _mapper = mapper;
         }
         public async Task<Client> AddClient(ClientInput client)
@@ -31,11 +30,7 @@ namespace CarSales.Services.ClientService
             {
                 throw new ArgumentNullException("client");
             }
-            else if(await ClientExists(client.IdentityNumber))
-            {
-                throw new ClientAlreadyExistsException();
-            }
-            return await _repository.Insert(_mapper.Map<Client>(client));
+            return await _clientRepo.InsertClient(_mapper.Map<Client>(client));
         }
 
         public async Task UpdateClient(ClientInput client)
@@ -44,39 +39,22 @@ namespace CarSales.Services.ClientService
             {
                 throw new ArgumentNullException("client");
             }
-            else if (! await ClientExists(client.IdentityNumber))
+            else if (await _clientRepo.GetClient(client.IdentityNumber) == null)
             {
-                throw new ClientDoesNotExistsException();
+                throw new DoesNotExistsException();
             }
-            await _repository.Update(_mapper.Map<Client>(client));
+            await _clientRepo.UpdateClient(_mapper.Map<Client>(client));
         }
 
-        public async Task<Client> GetClient(string IdentityNum)
-        {
-            if (String.IsNullOrEmpty(IdentityNum))
-            {
-                throw new ArgumentException("Identity Number Is Required!");
-            }
-            var client = await _appDbContext.Clients.Where(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null).FirstOrDefaultAsync();
-            if(client == null)
-            {
-                throw new ClientDoesNotExistsException();
-            }
-            return client;
+        public async Task<Client> FindClient(string IdentityNum)
+        { 
+            return await _clientRepo.GetClient(IdentityNum);
         }
 
         public async Task DeleteClient(string IdenNum)
         {
-            var client = await GetClient(IdenNum);
-             _repository.Delete(client);
+             await _clientRepo.DeleteClient(await _clientRepo.GetClient(IdenNum));
         }
 
-
-        #region private methods
-        private async Task<bool> ClientExists(string IdentityNumber)
-        {
-            return await  _appDbContext.Clients.Where(x => x.IdentityNumber == IdentityNumber && x.DeletedAt == null).AnyAsync();
-        }
-        #endregion
     }
 }

@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class CouldNotMatchException :Exception
+    public class DoesNotExistsException :Exception
     {
-        public CouldNotMatchException() : base()
+        public DoesNotExistsException() : base()
         {
 
         }
 
-        public CouldNotMatchException(string message) : base(message)
+        public DoesNotExistsException(string message) : base(message)
         {
 
         }

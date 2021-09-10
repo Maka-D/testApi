@@ -11,9 +11,8 @@ namespace CarSales.Services.CarService
     public interface ICarService
     {
         Task<Car> AddCar(string IdentityNumber, CarInput car);
-        Task<Car> GetCar(string VinCode);
-        //Task UpdateCar(CarInput client);
-        //Task<Car> GetCar(string VinCode);
         Task DeleteCar(string IdentityNum, string VinCode);
+        Task<bool> BuyCar(string IdentityNum, string VinCode);
+        Task<IEnumerable<Car>> GetAllCars(DateTime from, DateTime to);
     }
 }

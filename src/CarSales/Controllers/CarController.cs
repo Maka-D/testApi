@@ -1,4 +1,5 @@
-﻿using CarSales.Services.CarService;
+﻿using CarSales.Domain.CustomExceptions;
+using CarSales.Services.CarService;
 using CarSales.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -25,8 +26,20 @@ namespace CarSales.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterCar(string IdentityNumber, CarInput car)
         {
-            await _carService.AddCar(IdentityNumber, car);
-            return Ok();
+            try
+            {
+                await _carService.AddCar(IdentityNumber, car);
+            }
+            catch (AlreadyExistsException e)
+            {
+                _logger.LogInformation("Car with this VIN code already exists!");
+            }
+            catch (DoesNotExistsException e)
+            {
+                _logger.LogInformation("Car with this VIN code doesn't exists!");
+            }
+            return Ok(car);
+            
         }
 
     }

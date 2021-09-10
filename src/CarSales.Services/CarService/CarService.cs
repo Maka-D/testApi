@@ -3,6 +3,8 @@ using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Repository;
 using CarSales.Repository.RepositoryPattern;
+using CarSales.Repository.RepositoryPattern.CarRepository;
+using CarSales.Repository.RepositoryPattern.ClientRepository;
 using CarSales.Services.ClientService;
 using CarSales.Services.DTOs;
 using Microsoft.EntityFrameworkCore;
@@ -16,29 +18,44 @@ namespace CarSales.Services.CarService
 {
     public class CarService : ICarService
     {
-        private readonly IRepository<Car> _repository;
-        private readonly AppDbContext _appDbContext;
+        private readonly ICarRepository _carRepository;
+        private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
-        private readonly IClientService _client;
 
-        public CarService(IRepository<Car> repository, IMapper mapper, AppDbContext appDbContext, IClientService client)
+        public CarService(ICarRepository carRepository, IMapper mapper, IClientRepository clientRepository)
         {
-            _repository = repository;
-            _appDbContext = appDbContext;
+            _carRepository = carRepository;
             _mapper = mapper;
-            _client = client;
+            _clientRepository = clientRepository;
         }
         public async Task<Car> AddCar(string IdentityNumber, CarInput car)
         {
-            var client = await _client.GetClient(IdentityNumber);
-            if(await CarExists(car.VinCode) )
-            {
-                throw new CarAlreadyExistsException();
-            }
+            var client = await _clientRepository.GetClient(IdentityNumber);
+
             var insertedCar = _mapper.Map<Car>(car);
             insertedCar.ClientId = client.Id;
-            return await _repository.Insert(insertedCar);
+            insertedCar.Client = client;
+
+            return await _carRepository.InsertCar(insertedCar);
         }
+
+        public async Task<bool> BuyCar(string IdentityNum, string VinCode)
+        {
+            if (string.IsNullOrEmpty(VinCode))
+            {
+                throw new ArgumentNullException();
+            }
+            var client = _clientRepository.GetClient(IdentityNum);
+            var car = await _carRepository.GetCar(VinCode);
+            if(client.Id == car.ClientId || car.IsSold == true)
+            {
+                throw new CouldNotBuyCarException();
+            }
+            car.IsSold = true;
+            await _carRepository.UpdateCar(car);
+            return true;
+        }
+
 
         public async Task DeleteCar(string IdentityNum, string VinCode)
         {
@@ -46,39 +63,22 @@ namespace CarSales.Services.CarService
             {
                 throw new ArgumentNullException();
             }
-            if (! await CarExists(VinCode))
+            var client = await _clientRepository.GetClient(IdentityNum);
+            var car = await _carRepository.GetCar(VinCode);
+            if(car.ClientId != client.Id)
             {
-                throw new CarDoesNotExistsException();
+                throw new DoesNotExistsException("No such car is registered on this client!");
             }
-            var client = await _client.GetClient(IdentityNum);
-            var car = await GetCar(VinCode);
-            if(car.ClientId != client.Id )
-            {
-                throw new CouldNotMatchException("There's no client registered with this car VIN code!");
-            }
-             _repository.Delete(car);
+            await _carRepository.DeleteCar(car);
         }
 
-        public async Task<Car> GetCar(string VinCode)
+        public async Task<IEnumerable<Car>> GetAllCars(DateTime from, DateTime to)
         {
-            if (string.IsNullOrEmpty(VinCode))
-            {
-                throw new ArgumentNullException("VIN code is Required!");
-            }
-            var car = await _appDbContext.Cars.Where(x => x.VinCode == VinCode && x.DeletedAt == null).FirstOrDefaultAsync();
-            if (car == null)
-            {
-                throw new CarDoesNotExistsException();
-            }
-            return car;
+            var cars = await _carRepository.CarsToSale(from, to);
+            return cars;
         }
 
-        #region private methods
-        private async Task<bool> CarExists(string VinCode)
-        {
-            return await _appDbContext.Cars.Where(x => x.VinCode == VinCode && x.DeletedAt == null).AnyAsync();
-        }
-        #endregion
+
     }
 
 }
