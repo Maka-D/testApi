@@ -16,8 +16,6 @@ namespace CarSales.Services.MapperService
             CreateMap<ClientInput, Client>();
             CreateMap<CarInput, Car>();
 
-            CreateMap<Client, ClientInput>();
-            CreateMap<Car, CarInput>();
         }
     }
 }

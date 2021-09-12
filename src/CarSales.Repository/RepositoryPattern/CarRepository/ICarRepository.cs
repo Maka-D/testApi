@@ -1,4 +1,5 @@
 ﻿using CarSales.Domain.Models;
+using CarSales.Domain.Models.ReportModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
         Task<Car> InsertCar(Car entity);
         Task DeleteCar(Car entity);
         Task<bool> UpdateCar(Car entity);
-        Task<IEnumerable<Car>> CarsToSale(DateTime fromDate, DateTime toDate);
+        Task<List<Car>> CarsToSale(DateTime fromDate, DateTime toDate);
+        Task<List<ReportData>> GetCarsByMonth();
     }
 }

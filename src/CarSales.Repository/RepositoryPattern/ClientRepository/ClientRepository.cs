@@ -41,7 +41,7 @@ namespace CarSales.Repository.RepositoryPattern.ClientRepository
         {
             if (String.IsNullOrEmpty(IdentityNumber))
             {
-                throw new ArgumentException("Identity Number Is Required!");
+                throw new ArgumentNullException("Identity Number Is Required!");
             }
             var client = await _appDbContext.Clients
                 .Where(x => x.IdentityNumber == IdentityNumber && x.DeletedAt == null)

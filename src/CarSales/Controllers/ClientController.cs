@@ -1,4 +1,5 @@
-﻿using CarSales.Domain.Models;
+﻿using CarSales.Domain.CustomExceptions;
+using CarSales.Domain.Models;
 using CarSales.Services.ClientService;
 using CarSales.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -27,26 +28,66 @@ namespace CarSales.Controllers
         [HttpGet]
         public async Task<IActionResult> GetClient(string IdentityNumber)
         {
-            var client = await _clientService.FindClient(IdentityNumber);
+            Client client;
+            try
+            {
+                client = await _clientService.FindClient(IdentityNumber);               
+            }
+            catch(DoesNotExistsException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex);
+            }
+
             return Ok(client);
+
         }
 
         [HttpPost]
         public async Task<IActionResult> RegisterClient(ClientInput client)
         {
-            var createdClient =  await _clientService.AddClient(client);
+            Client createdClient;
+            try
+            {
+                createdClient = await _clientService.AddClient(client);
+            }
+            catch(AlreadyExistsException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex);
+            }
             return CreatedAtAction(nameof(GetClient), new { Id = createdClient.Id, createdClient });
         }
 
         [HttpPut]
         public async Task<ActionResult> EditClient(ClientInput client)
         {
-            if (ModelState.IsValid)
+            try
             {
                 await _clientService.UpdateClient(client);
-                return Ok();
+               
             }
-            return BadRequest();
+            catch (DoesNotExistsException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+                return BadRequest(ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex);
+            }
+            return Ok();
 
         }
 
@@ -55,14 +96,14 @@ namespace CarSales.Controllers
         {
             try
             {
-                await _clientService.DeleteClient(IdentityNumber);
-                return Ok();
+                await _clientService.DeleteClient(IdentityNumber);              
             }
             catch(Exception ex)
             {
-                _logger.LogError(" {0} " ,ex);
-                return BadRequest();
+                _logger.LogError(ex ,ex.Message);
+                return BadRequest(ex);
             }
+            return Ok();
             
         }
        

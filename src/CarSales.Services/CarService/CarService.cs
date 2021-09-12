@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
+using CarSales.Domain.Models.ReportModel;
 using CarSales.Repository;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Repository.RepositoryPattern.CarRepository;
@@ -52,6 +53,7 @@ namespace CarSales.Services.CarService
                 throw new CouldNotBuyCarException();
             }
             car.IsSold = true;
+            car.FinishedSale = DateTime.Now;
             await _carRepository.UpdateCar(car);
             return true;
         }
@@ -72,13 +74,21 @@ namespace CarSales.Services.CarService
             await _carRepository.DeleteCar(car);
         }
 
-        public async Task<IEnumerable<Car>> GetAllCars(DateTime from, DateTime to)
+        public async Task<IEnumerable<Car>> SellingCarsList(DateTime from, DateTime to)
         {
             var cars = await _carRepository.CarsToSale(from, to);
             return cars;
         }
 
-
+        public async Task<List<ReportData>> MonthlyReport()
+        {
+            var reportData = await  _carRepository.GetCarsByMonth();
+            if(reportData == null)
+            {
+                throw new DoesNotExistsException();
+            }
+            return reportData;
+        }
     }
 
 }

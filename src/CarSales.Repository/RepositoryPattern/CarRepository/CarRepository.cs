@@ -1,5 +1,6 @@
 ﻿using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
+using CarSales.Domain.Models.ReportModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
             _appDbContext = appDbContext;
         }
 
-        public async Task<IEnumerable<Car>> CarsToSale(DateTime fromDate, DateTime toDate)
+        public async Task<List<Car>> CarsToSale(DateTime fromDate, DateTime toDate)
         {
             var cars = await (from car in _appDbContext.Cars
                         where car.DeletedAt == null && car.IsSold == false
@@ -65,6 +66,39 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
             return car;
         }
 
+        public async Task<List<ReportData>> GetCarsByMonth()
+        {
+            var carGroups = await (from car in _appDbContext.Cars
+                       where car.DeletedAt == null && car.IsSold == true
+                       group car by DateTime.Parse(car.FinishedSale.ToString()).Month into MonthlySoldCars                      
+                       select new  { month = MonthlySoldCars.Key, Cars = MonthlySoldCars.ToList() }).ToListAsync();
+
+            if(carGroups == null)
+            {
+                throw new DoesNotExistsException();
+            }
+
+            var reports = new List<ReportData>();
+
+            foreach(var car in carGroups)
+            {
+                var report = new ReportData
+                {
+                    Month = car.month,
+                    CarsAmount = car.Cars.Count
+                };
+                foreach (var item in car.Cars)
+                {
+                    report.CarsPrice += item.Price;
+                }
+                report.AveragePrice = (double)report.CarsPrice / report.CarsAmount;
+                reports.Add(report);
+            }
+
+            return reports;
+
+        }
+
         public async Task<Car> InsertCar(Car entity)
         {
             if(entity == null)
@@ -81,6 +115,7 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
             else if(car != null && car.DeletedAt != null)
             {
                 entity.DeletedAt = null;
+                
                 _appDbContext.Cars.Update(entity);
             }
             else

@@ -1,4 +1,5 @@
-﻿using CarSales.Repository.RepositoryPattern;
+﻿using CarSales.Repository.RepositoryPattern.CarRepository;
+using CarSales.Repository.RepositoryPattern.ClientRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,8 @@ namespace CarSales.Repository
         {
             return services.AddDbContext<AppDbContext>
                 (options => options.UseSqlServer(conString))
-                .AddScoped(typeof(IRepository<>), typeof(Repository<>));
+                .AddScoped(typeof(IClientRepository), typeof(ClientRepository))
+                .AddScoped(typeof(ICarRepository), typeof(CarRepository));
         }
     }
 }
