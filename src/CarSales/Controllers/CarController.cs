@@ -55,11 +55,11 @@ namespace CarSales.Controllers
             return Ok(carsList.ToList());
         }
 
-        [HttpGet("[action]")]
-        public async Task<List<ReportData>> Report()
+        [HttpGet]
+        public async Task<IActionResult> Report()
         {
             var CarsListMonthly = await _carService.MonthlyReport();
-            return CarsListMonthly;
+            return Ok(CarsListMonthly.ToList());
         }
     }
 }

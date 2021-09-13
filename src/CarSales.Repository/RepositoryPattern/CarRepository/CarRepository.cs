@@ -1,4 +1,5 @@
-﻿using CarSales.Domain.CustomExceptions;
+﻿using AutoMapper;
+using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
 using Microsoft.EntityFrameworkCore;
@@ -13,10 +14,12 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
     public class CarRepository : ICarRepository
     {
         private readonly AppDbContext _appDbContext;
-
-        public CarRepository(AppDbContext appDbContext)
+        private readonly IMapper _mapper;
+        public CarRepository(AppDbContext appDbContext, IMapper mapper)
         {
             _appDbContext = appDbContext;
+            _mapper = mapper;
+
         }
 
         public async Task<List<Car>> CarsToSale(DateTime fromDate, DateTime toDate)
@@ -109,9 +112,15 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
             }
             else if(car != null && car.DeletedAt != null)
             {
-                entity.DeletedAt = null;
-                
-                _appDbContext.Cars.Update(entity);
+                car.DeletedAt = null;
+                car.ClientId = entity.ClientId;
+                car.Brand = entity.Brand;
+                car.CarNumber = entity.CarNumber;
+                car.Price = entity.Price;
+                car.ReleaseDate = entity.ReleaseDate;
+                car.StartedSale = entity.StartedSale;
+                car.FinishedSale = entity.FinishedSale;
+                _appDbContext.Cars.Update(car);
             }
             else
             {
@@ -134,6 +143,12 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
             {
                 throw new CarDoesNotExistsException();
             }
+            car.Brand = entity.Brand;
+            car.CarNumber = entity.CarNumber;
+            car.Price = entity.Price;
+            car.ReleaseDate = entity.ReleaseDate;
+            car.StartedSale = entity.StartedSale;
+            car.FinishedSale = entity.FinishedSale;
             _appDbContext.Cars.Update(entity);
             await _appDbContext.SaveChangesAsync();
             return true;
