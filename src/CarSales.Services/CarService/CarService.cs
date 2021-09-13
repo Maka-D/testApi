@@ -8,6 +8,7 @@ using CarSales.Repository.RepositoryPattern.CarRepository;
 using CarSales.Repository.RepositoryPattern.ClientRepository;
 using CarSales.Services.ClientService;
 using CarSales.Services.DTOs;
+using CarSales.Services.ValidateInput;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,15 +23,22 @@ namespace CarSales.Services.CarService
         private readonly ICarRepository _carRepository;
         private readonly IClientRepository _clientRepository;
         private readonly IMapper _mapper;
+        private readonly IInputValidator _validate;
 
-        public CarService(ICarRepository carRepository, IMapper mapper, IClientRepository clientRepository)
+        public CarService(ICarRepository carRepository, IMapper mapper
+            ,IClientRepository clientRepository, IInputValidator validate)
         {
             _carRepository = carRepository;
             _mapper = mapper;
             _clientRepository = clientRepository;
+            _validate = validate;
         }
         public async Task<Car> AddCar(string IdentityNumber, CarInput car)
         {
+            if (!_validate.IsValidIdentityNumber(IdentityNumber))
+            {
+                throw new InvalidInputException();
+            }
             var client = await _clientRepository.GetClient(IdentityNumber);
 
             var insertedCar = _mapper.Map<Car>(car);
@@ -42,11 +50,12 @@ namespace CarSales.Services.CarService
 
         public async Task<bool> BuyCar(string IdentityNum, string VinCode)
         {
-            if (string.IsNullOrEmpty(VinCode))
+            if (!_validate.IsValidIdentityNumber(IdentityNum) || !_validate.IsValidVinCode(VinCode))
             {
-                throw new ArgumentNullException();
+                throw new InvalidInputException();
             }
-            var client = _clientRepository.GetClient(IdentityNum);
+
+            var client = await _clientRepository.GetClient(IdentityNum);
             var car = await _carRepository.GetCar(VinCode);
             if(client.Id == car.ClientId || car.IsSold == true)
             {
@@ -65,16 +74,20 @@ namespace CarSales.Services.CarService
             {
                 throw new ArgumentNullException();
             }
+            if(IdentityNum.Length != 11 && VinCode.Length != 17)
+            {
+                throw new InvalidInputException();
+            }
             var client = await _clientRepository.GetClient(IdentityNum);
             var car = await _carRepository.GetCar(VinCode);
             if(car.ClientId != client.Id)
             {
-                throw new DoesNotExistsException("No such car is registered on this client!");
+                throw new CarDoesNotExistsException();
             }
             await _carRepository.DeleteCar(car);
         }
 
-        public async Task<IEnumerable<Car>> SellingCarsList(DateTime from, DateTime to)
+        public async Task<List<Car>> SellingCarsList(DateTime from, DateTime to)
         {
             var cars = await _carRepository.CarsToSale(from, to);
             return cars;
@@ -85,7 +98,7 @@ namespace CarSales.Services.CarService
             var reportData = await  _carRepository.GetCarsByMonth();
             if(reportData == null)
             {
-                throw new DoesNotExistsException();
+                throw new CarDoesNotExistsException();
             }
             return reportData;
         }

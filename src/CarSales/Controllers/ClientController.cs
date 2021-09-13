@@ -1,5 +1,6 @@
 ﻿using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
+using CarSales.Repository.ErrorHandlerMiddleware;
 using CarSales.Services.ClientService;
 using CarSales.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -16,34 +17,18 @@ namespace CarSales.Controllers
     public class ClientController : ControllerBase
     {
         
-        private readonly ILogger<ClientController> _logger;
         private readonly IClientService _clientService;
 
-        public ClientController(ILogger<ClientController> logger, IClientService clientService)
+        public ClientController(IClientService clientService)
         {
-            _logger = logger;
             _clientService = clientService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetClient(string IdentityNumber)
         {
-            Client client;
-            try
-            {
-                client = await _clientService.FindClient(IdentityNumber);               
-            }
-            catch(DoesNotExistsException ex)
-            {
-                _logger.LogWarning(ex, ex.Message);
-                return BadRequest(ex);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
-            }
 
+            var client = await _clientService.FindClient(IdentityNumber);               
             return Ok(client);
 
         }
@@ -51,42 +36,14 @@ namespace CarSales.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterClient(ClientInput client)
         {
-            Client createdClient;
-            try
-            {
-                createdClient = await _clientService.AddClient(client);
-            }
-            catch(AlreadyExistsException ex)
-            {
-                _logger.LogWarning(ex, ex.Message);
-                return BadRequest(ex);
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
-            }
-            return CreatedAtAction(nameof(GetClient), new { Id = createdClient.Id, createdClient });
+            var createdClient = await _clientService.AddClient(client);
+                return Ok(createdClient);
         }
 
         [HttpPut]
         public async Task<ActionResult> EditClient(ClientInput client)
         {
-            try
-            {
-                await _clientService.UpdateClient(client);
-               
-            }
-            catch (DoesNotExistsException ex)
-            {
-                _logger.LogWarning(ex, ex.Message);
-                return BadRequest(ex);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest(ex);
-            }
+            await _clientService.UpdateClient(client);
             return Ok();
 
         }
@@ -94,15 +51,7 @@ namespace CarSales.Controllers
         [HttpDelete]
         public async Task<ActionResult> DeleteClient(string IdentityNumber)
         {
-            try
-            {
-                await _clientService.DeleteClient(IdentityNumber);              
-            }
-            catch(Exception ex)
-            {
-                _logger.LogError(ex ,ex.Message);
-                return BadRequest(ex);
-            }
+            await _clientService.DeleteClient(IdentityNumber);
             return Ok();
             
         }

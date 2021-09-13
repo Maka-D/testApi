@@ -27,7 +27,7 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
                         select car).Include("Client").ToListAsync();
             if(cars == null)
             {
-                throw new DoesNotExistsException();
+                throw new CarDoesNotExistsException();
             }
             return cars;              
                        
@@ -44,7 +44,7 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
 
             if(car == null)
             {
-                throw new DoesNotExistsException();
+                throw new CarDoesNotExistsException();
             }
             _appDbContext.Cars.Remove(car);
             await _appDbContext.SaveChangesAsync();
@@ -52,35 +52,30 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
 
         public async Task<Car> GetCar(string VinCode)
         {
-            if (string.IsNullOrEmpty(VinCode))
-            {
-                throw new ArgumentNullException();
-            }
             var car = await _appDbContext.Cars
                 .Where(x => x.VinCode == VinCode && x.DeletedAt == null).FirstOrDefaultAsync();
 
             if(car == null)
             {
-                throw new DoesNotExistsException();
+                throw new CarDoesNotExistsException();
             }
             return car;
         }
 
         public async Task<List<ReportData>> GetCarsByMonth()
         {
-            var carGroups = await (from car in _appDbContext.Cars
-                       where car.DeletedAt == null && car.IsSold == true
-                       group car by DateTime.Parse(car.FinishedSale.ToString()).Month into MonthlySoldCars                      
-                       select new  { month = MonthlySoldCars.Key, Cars = MonthlySoldCars.ToList() }).ToListAsync();
+            var carGroups = await _appDbContext.Cars.Where(x => x.DeletedAt == null && x.IsSold == true).ToListAsync();
 
-            if(carGroups == null)
+            var filteredCars = carGroups.GroupBy(x => x.FinishedSale.Month).Select(x => new { month = x.Key, Cars = x.ToList() }).ToList();
+
+            if (filteredCars == null)
             {
-                throw new DoesNotExistsException();
+                throw new CarDoesNotExistsException();
             }
 
             var reports = new List<ReportData>();
 
-            foreach(var car in carGroups)
+            foreach(var car in filteredCars)
             {
                 var report = new ReportData
                 {
@@ -110,7 +105,7 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
 
             if(car != null && car.DeletedAt == null)
             {
-                throw new AlreadyExistsException();
+                throw new CarAlreadyExistsException();
             }
             else if(car != null && car.DeletedAt != null)
             {
@@ -137,7 +132,7 @@ namespace CarSales.Repository.RepositoryPattern.CarRepository
 
             if (car == null )
             {
-                throw new DoesNotExistsException();
+                throw new CarDoesNotExistsException();
             }
             _appDbContext.Cars.Update(entity);
             await _appDbContext.SaveChangesAsync();

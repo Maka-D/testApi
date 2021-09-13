@@ -14,7 +14,7 @@ namespace CarSales.Domain.Models
         public string IdentityNumber { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]

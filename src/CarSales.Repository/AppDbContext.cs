@@ -37,7 +37,7 @@ namespace CarSales.Repository
         public DbSet<Client> Clients { get; set; }
         public DbSet<Car> Cars { get; set; }
 
-        public override int SaveChanges()
+        public async override Task<int> SaveChangesAsync(CancellationToken token=default)
         {
             ChangeTracker.Entries<BaseEntity>()
                 .Where(e => e.State == EntityState.Deleted || e.State == EntityState.Modified || e.State == EntityState.Added)
@@ -58,7 +58,7 @@ namespace CarSales.Repository
                         e.Entity.DeletedAt = DateTime.Now;
                     }
                 });
-            return base.SaveChanges();
+            return await base.SaveChangesAsync();
         }
 
     }

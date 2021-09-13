@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class CouldNotBuyCarException :Exception
+    public class CarAlreadyExistsException : Exception
     {
-        public CouldNotBuyCarException() : base("Could not buy the car!")
+        public CarAlreadyExistsException() : base("Such car already exists!")
         {
 
         }
+
     }
 }

@@ -39,16 +39,12 @@ namespace CarSales.Repository.RepositoryPattern.ClientRepository
 
         public async Task<Client> GetClient(string IdentityNumber)
         {
-            if (String.IsNullOrEmpty(IdentityNumber))
-            {
-                throw new ArgumentNullException("Identity Number Is Required!");
-            }
             var client = await _appDbContext.Clients
                 .Where(x => x.IdentityNumber == IdentityNumber && x.DeletedAt == null)
                 .FirstOrDefaultAsync();
             if (client == null)
             {
-                throw new DoesNotExistsException("Could not find client with this Identity Number!");
+                throw new ClientDoesNotExistsException();
             }
             return client;
         }
@@ -66,7 +62,7 @@ namespace CarSales.Repository.RepositoryPattern.ClientRepository
             //if such client exists and is active throw exception
             if (client != null && client.DeletedAt == null)
             {
-                throw new AlreadyExistsException();
+                throw new ClientAlreadyExistsException();
 
             }
             //if such client exists but isn't active, update it as active
@@ -92,9 +88,9 @@ namespace CarSales.Repository.RepositoryPattern.ClientRepository
                 .Where(x => x.IdentityNumber == entity.IdentityNumber && x.DeletedAt == null).FirstOrDefaultAsync();
             if(client == null)
             {
-                throw new DoesNotExistsException();
+                throw new ClientDoesNotExistsException();
             }
-            _appDbContext.Clients.Update(entity);
+            _appDbContext.Clients.Update(client);
             await _appDbContext.SaveChangesAsync();
             return true;
         }

@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class DoesNotExistsException :Exception
+    public class CarDoesNotExistsException :Exception
     {
-        public DoesNotExistsException() : base()
+        public CarDoesNotExistsException() : base("Could not find such car!")
         {
 
         }
 
-        public DoesNotExistsException(string message) : base(message)
-        {
-
-        }
     }
 }

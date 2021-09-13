@@ -16,37 +16,17 @@ namespace CarSales.Controllers
     [Route("[controller]")]
     public class CarController :Controller
     {
-        private readonly ILogger<ClientController> _logger;
         private readonly ICarService _carService;
 
-        public CarController(ILogger<ClientController> logger, ICarService carService)
+        public CarController( ICarService carService)
         {
-            _logger = logger;
             _carService = carService;
         }
 
         [HttpPost]
         public async Task<IActionResult> RegisterCar(string IdentityNumber, CarInput car)
         {
-            try
-            {
-                await _carService.AddCar(IdentityNumber, car);
-            }
-            catch (AlreadyExistsException e)
-            {
-                _logger.LogWarning(e, e.Message);
-                return BadRequest();
-            }
-            catch (DoesNotExistsException e)
-            {
-                _logger.LogWarning(e, e.Message);
-                return BadRequest();
-            }
-            catch(Exception e)
-            {
-                _logger.LogError(e, e.Message);
-                return BadRequest();
-            }
+            await _carService.AddCar(IdentityNumber, car);
             return Ok(car);
             
         }
@@ -54,89 +34,32 @@ namespace CarSales.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteCar(string IdentityNumber, string VinCode)
         {
-            try
-            {
-                await _carService.DeleteCar(IdentityNumber, VinCode);
-            }
-            catch (DoesNotExistsException e)
-            {
-                _logger.LogWarning(e, e.Message);
-                return BadRequest();
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, e.Message);
-                return BadRequest();
-            }
-            return Ok();
+
+            await _carService.DeleteCar(IdentityNumber, VinCode);          
+            return Ok("Successfully Deleted");
 
         }
 
         [HttpPost("BuyCar")]
         public async Task<IActionResult> BuyCar(string IdentityNumber, string VinCode)
         {
-            try
-            {
-                await _carService.BuyCar(IdentityNumber, VinCode);
-            }
-            catch(CouldNotBuyCarException ex)
-            {
-                _logger.LogWarning(ex, ex.Message);
-                return BadRequest();
-            }
-            catch(DoesNotExistsException ex)
-            {
-                _logger.LogWarning(ex, ex.Message);
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest();
-            }
+            await _carService.BuyCar(IdentityNumber, VinCode);
             return Ok();
         }
 
         [HttpPost("SellingCarsList")]
         public async Task<IActionResult> SellingCarsList(DateTime from, DateTime to)
         {
-            IEnumerable<Car> CarsList;
-            try
-            {
-                CarsList = await _carService.SellingCarsList(from, to);
-            }
-            catch (DoesNotExistsException ex)
-            {
-                _logger.LogWarning(ex, ex.Message);
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest();
-            }
-            return Ok(CarsList);
+            var carsList = await _carService.SellingCarsList(from, to);
+           
+            return Ok(carsList.ToList());
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Report()
+        [HttpGet("[action]")]
+        public async Task<List<ReportData>> Report()
         {
-            List<ReportData> CarsListMonthly;
-            try
-            {
-                CarsListMonthly = await _carService.MonthlyReport();
-            }
-            catch (DoesNotExistsException ex)
-            {
-                _logger.LogWarning(ex, ex.Message);
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest();
-            }
-            return Ok(CarsListMonthly);
+            var CarsListMonthly = await _carService.MonthlyReport();
+            return CarsListMonthly;
         }
     }
 }

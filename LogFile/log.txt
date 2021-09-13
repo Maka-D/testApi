@@ -1,0 +1,71 @@
+09/13/2021 22:23:39 +04:00 HTTP "PUT" "/Client" responded 500 in 113.2928 ms
+09/13/2021 23:03:17 +04:00 HTTP "PUT" "/Client" responded 200 in 3174.1838 ms
+09/14/2021 00:03:51 +04:00 HTTP "PUT" "/Client" responded 200 in 65.4240 ms
+09/14/2021 00:04:02 +04:00 HTTP "PUT" "/Client" responded 200 in 33.2312 ms
+09/14/2021 00:04:15 +04:00 Invalid Input!
+09/14/2021 00:04:15 +04:00 HTTP "DELETE" "/Client?IdentityNumber=1" responded 400 in 20.0352 ms
+09/14/2021 00:04:23 +04:00 Invalid Input!
+09/14/2021 00:04:23 +04:00 HTTP "DELETE" "/Client?IdentityNumber=1111111111111" responded 400 in 4.8577 ms
+09/14/2021 00:04:26 +04:00 Invalid Input!
+09/14/2021 00:04:26 +04:00 HTTP "DELETE" "/Client?IdentityNumber=1111111111111" responded 400 in 5.0808 ms
+09/14/2021 00:04:34 +04:00 Coud not find such client!
+09/14/2021 00:04:34 +04:00 HTTP "DELETE" "/Client?IdentityNumber=11111111112" responded 400 in 7.5278 ms
+09/14/2021 00:05:50 +04:00 HTTP "POST" "/Car?IdentityNumber=77777777778" responded 400 in 43.9534 ms
+09/14/2021 00:06:09 +04:00 HTTP "POST" "/Car?IdentityNumber=77777777778" responded 200 in 246.0841 ms
+09/14/2021 00:06:18 +04:00 Such car already exists!
+09/14/2021 00:06:18 +04:00 HTTP "POST" "/Car?IdentityNumber=77777777778" responded 400 in 17.8861 ms
+09/14/2021 00:06:40 +04:00 HTTP "POST" "/Car?IdentityNumber=77777777778" responded 200 in 18.1012 ms
+09/14/2021 00:07:11 +04:00 HTTP "POST" "/Car/SellingCarsList?from=2020%2F10%2F10&to=2022%2F10%2F10" responded 200 in 111.6191 ms
+09/14/2021 00:21:40 +04:00 Failed executing DbCommand ("125"ms) [Parameters=["@__fromDate_0='?' (DbType = DateTime), @__toDate_1='?' (DbType = DateTime)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [c].[Id], [c].[Brand], [c].[CarNumber], [c].[ClientId], [c].[CreationDate], [c].[DeletedAt], [c].[FinishedSaleDate], [c].[IsSold], [c].[Model], [c].[ModifiedDate], [c].[Price], [c].[ReleaseDate], [c].[StartedSaleDate], [c].[VinCode], [c0].[Id], [c0].[Address], [c0].[BirthDate], [c0].[CreationDate], [c0].[DeletedAt], [c0].[Email], [c0].[FirstName], [c0].[IdentityNumber], [c0].[ModifiedDate], [c0].[PhoneNumber], [c0].[SecondName]
+FROM [Cars] AS [c]
+INNER JOIN [Clients] AS [c0] ON [c].[ClientId] = [c0].[Id]
+WHERE (([c].[DeletedAt] IS NULL AND ([c].[IsSold] <> CAST(1 AS bit))) AND ([c].[StartedSaleDate] >= @__fromDate_0)) AND ([c].[FinishedSaleDate] <= @__toDate_1)"
+09/14/2021 00:21:40 +04:00 An exception occurred while iterating over the results of a query for context type '"CarSales.Repository.AppDbContext"'."
+""System.Data.SqlTypes.SqlTypeException: SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.Data.SqlTypes.SqlTypeException: SqlDateTime overflow. Must be between 1/1/1753 12:00:00 AM and 12/31/9999 11:59:59 PM.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__169_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__277_0(Object obj)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(DbContext _, Boolean result, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/14/2021 00:21:40 +04:00 HTTP "POST" "/Car/SellingCarsList?from=2020%2F10%2F10" responded 500 in 3313.0605 ms
+09/14/2021 00:21:52 +04:00 HTTP "POST" "/Car/SellingCarsList?from=2020%2F10%2F10&to=2020%2F10%2F10" responded 200 in 130.2588 ms
+09/14/2021 00:22:43 +04:00 HTTP "GET" "/Car/SellingCarsList?from=2020%2F10%2F10&to=2022%2F10%2F10" responded 200 in 2987.7610 ms
+09/14/2021 00:42:38 +04:00 HTTP "POST" "/Car/SellingCarsList?from=2010%2F10%2F10&to=2022%2F10%2F10" responded 200 in 3152.9858 ms
+09/14/2021 00:44:45 +04:00 Could not buy the car!
+09/14/2021 00:44:45 +04:00 HTTP "POST" "/Car/BuyCar?IdentityNumber=77777777778&VinCode=123456789ABCDABCD" responded 400 in 91.0178 ms
+09/14/2021 00:45:01 +04:00 Invalid Input!
+09/14/2021 00:45:01 +04:00 HTTP "POST" "/Car/BuyCar?IdentityNumber=77777777778&VinCode=123456789ABCDA" responded 400 in 8.4127 ms
+09/14/2021 00:45:25 +04:00 HTTP "POST" "/Car/BuyCar?IdentityNumber=12121212121&VinCode=123456789ABCDABCD" responded 200 in 226.1835 ms
+09/14/2021 00:45:40 +04:00 HTTP "GET" "/Car/Report" responded 500 in 79.5024 ms
+09/14/2021 00:47:27 +04:00 HTTP "GET" "/Car/Report" responded 500 in 1529.6103 ms
+09/14/2021 00:52:58 +04:00 HTTP "GET" "/Car/Report" responded 500 in 45.0256 ms
+09/14/2021 01:04:41 +04:00 HTTP "GET" "/Car/Report" responded 500 in 2155.3051 ms
+09/14/2021 01:05:39 +04:00 HTTP "GET" "/Car/Report" responded 500 in 1944.0180 ms
+09/14/2021 01:11:44 +04:00 HTTP "GET" "/Car/Report" responded 500 in 1676.0010 ms
+09/14/2021 01:16:09 +04:00 HTTP "GET" "/Car/Report" responded 500 in 1116.4898 ms
+09/14/2021 01:25:02 +04:00 HTTP "GET" "/Car/Report" responded 500 in 1104.1879 ms
+09/14/2021 01:29:03 +04:00 HTTP "GET" "/Car/Report" responded 500 in 1039.9215 ms
+09/14/2021 01:33:15 +04:00 HTTP "GET" "/Car/Report" responded 200 in 1721.4897 ms

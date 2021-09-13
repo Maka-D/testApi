@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class AlreadyExistsException : Exception
+    public class ClientAlreadyExistsException :Exception
     {
-        public AlreadyExistsException() : base()
+        public ClientAlreadyExistsException() : base("Such client already exists!")
         {
 
         }
-
-        public AlreadyExistsException(string message) : base(message)
-        {
-
-        }
-
     }
 }

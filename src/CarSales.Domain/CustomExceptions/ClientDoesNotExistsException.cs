@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class CouldNotBuyCarException :Exception
+    public class ClientDoesNotExistsException :Exception
     {
-        public CouldNotBuyCarException() : base("Could not buy the car!")
+        public ClientDoesNotExistsException() : base("Coud not find such client!")
         {
 
         }

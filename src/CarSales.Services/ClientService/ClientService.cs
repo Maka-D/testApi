@@ -5,6 +5,7 @@ using CarSales.Repository;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Repository.RepositoryPattern.ClientRepository;
 using CarSales.Services.DTOs;
+using CarSales.Services.ValidateInput;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,15 +19,17 @@ namespace CarSales.Services.ClientService
     {
         private readonly IClientRepository _clientRepo;
         private readonly IMapper _mapper;
+        private readonly IInputValidator _validate;
 
-        public ClientService(IMapper mapper, IClientRepository clientRepo)
+        public ClientService(IMapper mapper, IClientRepository clientRepo, IInputValidator validate)
         {
             _clientRepo = clientRepo;
             _mapper = mapper;
+            _validate = validate;
         }
         public async Task<Client> AddClient(ClientInput client)
         {
-            if(client == null)
+            if (client == null)
             {
                 throw new ArgumentNullException("client");
             }
@@ -41,19 +44,27 @@ namespace CarSales.Services.ClientService
             }
             else if (await _clientRepo.GetClient(client.IdentityNumber) == null)
             {
-                throw new DoesNotExistsException();
+                throw new ClientDoesNotExistsException();
             }
             await _clientRepo.UpdateClient(_mapper.Map<Client>(client));
         }
 
         public async Task<Client> FindClient(string IdentityNum)
-        { 
+        {
+            if (!_validate.IsValidIdentityNumber(IdentityNum))
+            {
+                throw new InvalidInputException();
+            }
             return await _clientRepo.GetClient(IdentityNum);
         }
 
         public async Task DeleteClient(string IdenNum)
         {
-             await _clientRepo.DeleteClient(await _clientRepo.GetClient(IdenNum));
+            if (!_validate.IsValidIdentityNumber(IdenNum))
+            {
+                throw new InvalidInputException();
+            }
+            await _clientRepo.DeleteClient(await _clientRepo.GetClient(IdenNum));
         }
 
     }

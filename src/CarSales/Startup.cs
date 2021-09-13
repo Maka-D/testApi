@@ -1,8 +1,10 @@
 using AutoMapper;
 using CarSales.Repository;
+using CarSales.Repository.ErrorHandlerMiddleware;
 using CarSales.Services.CarService;
 using CarSales.Services.ClientService;
 using CarSales.Services.MapperService;
+using CarSales.Services.ValidateInput;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -45,7 +47,7 @@ namespace CarSales
 
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<ICarService, CarService>();
-
+            services.AddTransient<IInputValidator, InputValidator>();
             
             services.AddAutoMapper(typeof(MapperProfile));
 
@@ -66,6 +68,8 @@ namespace CarSales
             app.UseRouting();
 
             app.UseSerilogRequestLogging();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseAuthorization();
 

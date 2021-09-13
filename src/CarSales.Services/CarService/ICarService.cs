@@ -14,7 +14,7 @@ namespace CarSales.Services.CarService
         Task<Car> AddCar(string IdentityNumber, CarInput car);
         Task DeleteCar(string IdentityNum, string VinCode);
         Task<bool> BuyCar(string IdentityNum, string VinCode);
-        Task<IEnumerable<Car>> SellingCarsList(DateTime from, DateTime to);
+        Task<List<Car>> SellingCarsList(DateTime from, DateTime to);
         Task<List<ReportData>> MonthlyReport();
     }
 }
