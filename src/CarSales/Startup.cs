@@ -1,10 +1,7 @@
 using AutoMapper;
 using CarSales.Repository;
 using CarSales.Repository.ErrorHandlerMiddleware;
-using CarSales.Services.CarService;
-using CarSales.Services.ClientService;
-using CarSales.Services.MapperService;
-using CarSales.Services.ValidateInput;
+using CarSales.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,14 +39,12 @@ namespace CarSales
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarSales", Version = "v1" });
             });
 
-            services.AddServices(Configuration.GetConnectionString("carConn"));
+            services.AddDbContext<AppDbContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("carConn")));
 
+            services.AddRepository();
 
-            services.AddTransient<IClientService, ClientService>();
-            services.AddTransient<ICarService, CarService>();
-            services.AddTransient<IInputValidator, InputValidator>();
-            
-            services.AddAutoMapper(typeof(MapperProfile));
+            services.AddServices();
 
         }
 

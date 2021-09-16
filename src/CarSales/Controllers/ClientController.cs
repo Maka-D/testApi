@@ -1,7 +1,7 @@
 ﻿using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Repository.ErrorHandlerMiddleware;
-using CarSales.Services.ClientService;
+using CarSales.Services.ClientServices;
 using CarSales.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

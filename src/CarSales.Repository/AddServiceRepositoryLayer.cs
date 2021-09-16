@@ -1,5 +1,5 @@
-﻿using CarSales.Repository.RepositoryPattern.CarRepository;
-using CarSales.Repository.RepositoryPattern.ClientRepository;
+﻿using CarSales.Domain.Models;
+using CarSales.Repository.RepositoryPattern;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,12 +13,11 @@ namespace CarSales.Repository
 {
     public static class AddServiceRepositoryLayer 
     {
-        public static IServiceCollection AddServices(this IServiceCollection services, string conString)
+        public static IServiceCollection AddRepository(this IServiceCollection services)
         {
-            return services.AddDbContext<AppDbContext>
-                (options => options.UseSqlServer(conString))
-                .AddScoped(typeof(IClientRepository), typeof(ClientRepository))
-                .AddScoped(typeof(ICarRepository), typeof(CarRepository));
+            return services
+                .AddScoped(typeof(IRepository<Client>), typeof(Repository<Client>))
+                .AddScoped(typeof(IRepository<Car>), typeof(Repository<Car>));
         }
     }
 }

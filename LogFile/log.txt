@@ -259,3 +259,8 @@ Error Number:2601,State:1,Class:14
 09/14/2021 02:09:29 +04:00 HTTP "POST" "/Car?IdentityNumber=77777777778" responded 500 in 1956.6035 ms
 09/14/2021 02:16:03 +04:00 HTTP "POST" "/Car?IdentityNumber=77777777778" responded 200 in 1631.7601 ms
 09/14/2021 02:16:19 +04:00 HTTP "GET" "/Car" responded 200 in 53.4594 ms
+09/16/2021 12:37:32 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 14388.3691 ms
+09/16/2021 12:37:32 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 30519.7760 ms
+09/16/2021 12:39:00 +04:00 Coud not find such client!
+09/16/2021 12:39:11 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 400 in 61067.8496 ms
+09/17/2021 03:10:58 +04:00 HTTP "GET" "/favicon.ico" responded 404 in 2.8525 ms

@@ -1,7 +1,7 @@
 ﻿using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
-using CarSales.Services.CarService;
+using CarSales.Services.CarServices;
 using CarSales.Services.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -48,9 +48,9 @@ namespace CarSales.Controllers
         }
 
         [HttpPost("SellingCarsList")]
-        public async Task<IActionResult> SellingCarsList(DateTime from, DateTime to)
+        public async Task<IActionResult> SellingCarsList(DateInput date)
         {
-            var carsList = await _carService.SellingCarsList(from, to);
+            var carsList = await _carService.SellingCarsList(date);
            
             return Ok(carsList.ToList());
         }

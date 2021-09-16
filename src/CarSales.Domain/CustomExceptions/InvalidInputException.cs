@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class InvalidInputException :Exception
+    public class InvalidInputException :BaseCustomException
     {
         public InvalidInputException() : base("Invalid Input!")
         {

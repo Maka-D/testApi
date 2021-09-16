@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Services.ClientService
+namespace CarSales.Services.ClientServices
 {
     public interface IClientService
     {

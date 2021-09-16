@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace CarSales.Services.ValidateInput
 {
-    public class InputValidator : IInputValidator
+    public class InputValidator 
     {
-        public bool IsValidIdentityNumber(string identityNum)
+        public static bool IsValidIdentityNumber(string identityNum)
         {
             return (!string.IsNullOrEmpty(identityNum) && identityNum.Length == 11);
         }
 
-        public bool IsValidVinCode(string VinCode)
+        public static bool IsValidVinCode(string VinCode)
         {
             return (!string.IsNullOrEmpty(VinCode) && VinCode.Length == 17);
         }

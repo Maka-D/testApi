@@ -32,44 +32,21 @@ namespace CarSales.Repository.ErrorHandlerMiddleware
                 var response = context.Response;
                 response.ContentType = "application/json";
 
-                switch (error)
-                {
-                    case CarAlreadyExistsException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        _logger.LogWarning(e.Message);
-                        break;
-                    case ClientAlreadyExistsException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        _logger.LogWarning(e.Message);
-                        break;
-                    case ClientDoesNotExistsException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        _logger.LogWarning(e.Message);
-                        break;
-                    case CarDoesNotExistsException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        _logger.LogWarning(e.Message);
-                        break;
-                    case CouldNotBuyCarException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        _logger.LogWarning(e.Message);
-                        break;
-                    case InvalidInputException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        _logger.LogWarning(e.Message);
-                        break;
-                    case ArgumentNullException e:
-                        response.StatusCode = (int)HttpStatusCode.BadRequest;
-                        _logger.LogWarning(e.Message);
-                        break;
+                ProcessingResponse(error, response);
 
-                    default:
-                        response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                        break;
-                }
                 var result = JsonSerializer.Serialize(new { message = error?.Message });
                 await response.WriteAsync(result);
             }
+        }
+
+        private void ProcessingResponse(Exception error, HttpResponse response)
+        {
+            if (error is BaseCustomException)
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+            else
+                response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+            _logger.LogError(error.Message);
         }
     }
 }

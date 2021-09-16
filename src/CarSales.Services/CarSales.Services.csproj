@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CarSales.Domain\CarSales.Domain.csproj" />
     <ProjectReference Include="..\CarSales.Repository\CarSales.Repository.csproj" />
   </ItemGroup>

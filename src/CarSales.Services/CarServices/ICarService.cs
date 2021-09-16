@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Services.CarService
+namespace CarSales.Services.CarServices
 {
     public interface ICarService
     {
         Task<Car> AddCar(string IdentityNumber, CarInput car);
         Task DeleteCar(string IdentityNum, string VinCode);
         Task<bool> BuyCar(string IdentityNum, string VinCode);
-        Task<List<Car>> SellingCarsList(DateTime from, DateTime to);
+        Task<List<Car>> SellingCarsList(DateInput input);
         Task<List<ReportData>> MonthlyReport();
     }
 }

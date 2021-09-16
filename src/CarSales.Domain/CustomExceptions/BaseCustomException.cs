@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class CouldNotBuyCarException : BaseCustomException
+    public class BaseCustomException :Exception
     {
-        public CouldNotBuyCarException() : base("Could not buy the car!")
+        public BaseCustomException() : base()
+        {
+
+        }
+        public BaseCustomException(string message) : base(message)
         {
 
         }

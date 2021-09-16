@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.CustomExceptions
 {
-    public class CarDoesNotExistsException :Exception
+    public class CarDoesNotExistsException : BaseCustomException
     {
         public CarDoesNotExistsException() : base("Could not find such car!")
         {
