@@ -12,6 +12,7 @@ namespace CarSales.Services.FluentValidation
     {
         public CarInputValidation()
         {
+
             RuleFor(x => x.VinCode)
                 .NotEmpty()
                 .Length(17);

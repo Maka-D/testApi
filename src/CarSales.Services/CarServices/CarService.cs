@@ -81,13 +81,16 @@ namespace CarSales.Services.CarServices
 
         public async Task<List<Car>> SellingCarsList(DateInput date)
         {
-            if(date.To > date.From)
+            if(date.To < date.From)
             {
                 throw new InvalidInputException();
             }
             var cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false &&
                          x.StartedSale >= date.From && x.FinishedSale <= date.To);
-            
+            if(cars == null || cars.Count == 0)
+            {
+                throw new CarDoesNotExistsException();
+            }
             return cars;
         }
 

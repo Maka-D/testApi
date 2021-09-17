@@ -72,18 +72,18 @@ namespace CarSales.Repository.RepositoryPattern
             var entity = await Task.FromResult(_entities.Where(predicate).FirstOrDefault());
             if(entity == null)
             {
-                ThrowEntityExistsExceptions(entity);
+                ThrowEntityDoesNotExistsExceptions(entity);
             }
             return entity;
         }
 
         public async Task<List<T>> GetByCondition(Func<T, bool> predicate)
         {
-            //if(typeof(T) == typeof(Car))
-            //{              
-            //    var cars =  _appDbContext.Cars.Include("Client").Where((Func<Car, bool>)predicate).ToList();
-            //    return await Task.FromResult(cars.ToList());
-            //}
+            if (typeof(T) == typeof(Car))
+            {
+                var cars = (IEnumerable<T>)_appDbContext.Cars.Include("Client").Where((Func<Car, bool>)predicate).ToList();                
+                return await Task.FromResult(cars.ToList());
+            }
             return await Task.FromResult(_entities.Where(predicate).ToList());
         }
 
@@ -104,7 +104,7 @@ namespace CarSales.Repository.RepositoryPattern
 
         private static void ThrowEntityExistsExceptions(T entity)
         {
-            if (entity is Client)
+            if (typeof(T) == typeof(Client))
                 throw new ClientAlreadyExistsException();
             else
                 throw new CarAlreadyExistsException();
@@ -112,7 +112,7 @@ namespace CarSales.Repository.RepositoryPattern
 
         private static void ThrowEntityDoesNotExistsExceptions(T entity)
         {
-            if (entity is Client)
+            if (typeof(T) == typeof(Client))
                 throw new ClientDoesNotExistsException();
             else
                 throw new CarDoesNotExistsException();

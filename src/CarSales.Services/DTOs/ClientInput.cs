@@ -10,7 +10,6 @@ namespace CarSales.Services.DTOs
     public class ClientInput
     {
         [Required]
-        [RegularExpression("^[0-9]{11}$")]
         public string IdentityNumber { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }

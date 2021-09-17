@@ -14,7 +14,8 @@ namespace CarSales.Services.FluentValidator
         {
             RuleFor(x => x.IdentityNumber)
                 .NotEmpty()
-                .Length(11);
+                .Length(11)
+                .WithMessage("Identity Number must contain 11 characters!");
 
             RuleFor(x => x.FirstName)
                 .MaximumLength(20);
@@ -29,7 +30,8 @@ namespace CarSales.Services.FluentValidator
                 .MaximumLength(50);
 
             RuleFor(x => x.PhoneNumber)
-                .NotEmpty();
+                .NotEmpty()
+                .WithMessage("Phone Number Is Required!");
                 
                 
                 
