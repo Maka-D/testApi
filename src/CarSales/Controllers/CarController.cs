@@ -14,7 +14,7 @@ namespace CarSales.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CarController :Controller
+    public class CarController :ControllerBase
     {
         private readonly ICarService _carService;
 

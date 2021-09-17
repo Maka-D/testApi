@@ -54,55 +54,6 @@
 09/17/2021 03:10:58 +04:00 HTTP "GET" "/favicon.ico" responded 404 in 2.8525 ms
 09/17/2021 12:26:08 +04:00 Invalid Input!
 09/17/2021 12:26:08 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 2037.3925 ms
-09/17/2021 12:27:03 +04:00 Failed executing DbCommand ("50"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
-""SELECT [c].[Id], [c].[Brand], [c].[CarNumber], [c].[ClientId], [c].[CreationDate], [c].[DeletedAt], [c].[FinishedSale], [c].[IsSold], [c].[Model], [c].[ModifiedDate], [c].[Price], [c].[ReleaseDate], [c].[StartedSale], [c].[VinCode], [c0].[Id], [c0].[Address], [c0].[BirthDate], [c0].[CreationDate], [c0].[DeletedAt], [c0].[Email], [c0].[FirstName], [c0].[IdentityNumber], [c0].[ModifiedDate], [c0].[PhoneNumber], [c0].[SecondName]
-FROM [Cars] AS [c]
-INNER JOIN [Clients] AS [c0] ON [c].[ClientId] = [c0].[Id]"
-09/17/2021 12:27:03 +04:00 An exception occurred while iterating over the results of a query for context type '"CarSales.Repository.AppDbContext"'."
-""Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'FinishedSale'.
-Invalid column name 'StartedSale'.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
-ClientConnectionId:8e7bbc67-e960-4e5b-94f0-c2add72e1be9
-Error Number:207,State:1,Class:16"
-Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'FinishedSale'.
-Invalid column name 'StartedSale'.
-   at Microsoft.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
-   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
-   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
-   at Microsoft.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
-   at Microsoft.Data.SqlClient.SqlDataReader.get_MetaData()
-   at Microsoft.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean isAsync, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
-   at Microsoft.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
-   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(DbContext _, Boolean result)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
-ClientConnectionId:8e7bbc67-e960-4e5b-94f0-c2add72e1be9
-Error Number:207,State:1,Class:16
-09/17/2021 12:27:03 +04:00 Invalid column name 'FinishedSale'.
-Invalid column name 'StartedSale'.
 09/17/2021 12:27:03 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 500 in 3037.1693 ms
 09/17/2021 12:31:40 +04:00 Unable to cast object of type 'System.Collections.Generic.List`1[CarSales.Domain.Models.Car]' to type 'System.Linq.IQueryable`1[CarSales.Domain.Models.Car]'.
 09/17/2021 12:31:40 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 500 in 3101.7951 ms
@@ -125,3 +76,8 @@ Invalid column name 'StartedSale'.
 09/17/2021 12:53:28 +04:00 HTTP "GET" "/Client?IdentityNumber=77777777778" responded 400 in 2799.8003 ms
 09/17/2021 16:07:57 +04:00 HTTP "POST" "/Client" responded 400 in 1676.1843 ms
 09/17/2021 16:09:39 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 1749.8556 ms
+09/17/2021 18:21:42 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 2457.4542 ms
+09/17/2021 18:22:07 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 4.7577 ms
+09/17/2021 18:22:07 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1389 ms
+09/17/2021 18:23:13 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 52459.7131 ms
+09/17/2021 18:23:44 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 18380.6333 ms
