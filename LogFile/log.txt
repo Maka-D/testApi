@@ -119,3 +119,89 @@
 09/21/2021 14:36:39 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2090 ms
 09/21/2021 14:37:34 +04:00 HTTP "PUT" "/Client" responded 200 in 30649.6953 ms
 09/21/2021 14:38:07 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 200 in 15771.3678 ms
+09/21/2021 18:10:28 +04:00 Application failed to start!
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.) (Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.DefaultServiceProviderFactory.CreateServiceProvider(IServiceCollection containerBuilder)
+   at Microsoft.Extensions.Hosting.Internal.ServiceFactoryAdapter`1.CreateServiceProvider(Object containerBuilder)
+   at Microsoft.Extensions.Hosting.HostBuilder.CreateServiceProvider()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at CarSales.Program.Main(String[] args) in D:\testApi\src\CarSales\Program.cs:line 31
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)<---
+
+09/21/2021 18:11:45 +04:00 Application failed to start!
+System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.) (Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.)
+ ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
+   at Microsoft.Extensions.DependencyInjection.DefaultServiceProviderFactory.CreateServiceProvider(IServiceCollection containerBuilder)
+   at Microsoft.Extensions.Hosting.Internal.ServiceFactoryAdapter`1.CreateServiceProvider(Object containerBuilder)
+   at Microsoft.Extensions.Hosting.HostBuilder.CreateServiceProvider()
+   at Microsoft.Extensions.Hosting.HostBuilder.Build()
+   at CarSales.Program.Main(String[] args) in D:\testApi\src\CarSales\Program.cs:line 31
+ ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
+ ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   --- End of inner exception stack trace ---
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)<---
+
+09/21/2021 18:14:05 +04:00 Could not find such car!
+09/21/2021 18:14:05 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 1661.5053 ms
+09/21/2021 18:14:17 +04:00 Could not find such car!
+09/21/2021 18:14:17 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 42.6532 ms
+09/21/2021 18:16:22 +04:00 HTTP "POST" "/Car?IdentityNumber=12312312312" responded 200 in 513.7355 ms
+09/21/2021 18:17:47 +04:00 HTTP "POST" "/Car?IdentityNumber=12312312312" responded 400 in 24.1097 ms
+09/21/2021 18:18:01 +04:00 HTTP "POST" "/Car?IdentityNumber=12312312312" responded 400 in 2.8886 ms
+09/21/2021 18:18:37 +04:00 HTTP "POST" "/Car?IdentityNumber=12312312312" responded 200 in 16.2552 ms
+09/21/2021 18:18:51 +04:00 Could not find such car!
+09/21/2021 18:18:51 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 8.6186 ms
+09/21/2021 18:19:09 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 22.6556 ms
+09/21/2021 18:19:27 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 2.3307 ms
+09/21/2021 18:21:38 +04:00 The client has disconnected
+09/21/2021 18:21:38 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 500 in 2115.1855 ms
+09/21/2021 18:21:52 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 1420.0303 ms
+09/21/2021 18:23:08 +04:00 The client has disconnected
+09/21/2021 18:23:08 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 500 in 1934.1788 ms
+09/21/2021 18:23:14 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 135.2505 ms
+09/21/2021 18:23:30 +04:00 Could not find such car!
+09/21/2021 18:23:30 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 1338.6912 ms
+09/21/2021 18:23:40 +04:00 Could not find such car!
+09/21/2021 18:23:40 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 15.0232 ms
+09/21/2021 18:23:49 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 26.6699 ms
+09/21/2021 18:24:22 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 3.2237 ms

@@ -3,6 +3,7 @@ using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
 using CarSales.Repository;
+using CarSales.Repository.CustomRepositories;
 using CarSales.Repository.MemoryCacheService;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Services.ClientServices;
@@ -19,13 +20,13 @@ namespace CarSales.Services.CarServices
 {
     public class CarService : ICarService
     {
-        private readonly IRepository<Car> _carRepository;
-        private readonly IRepository<Client> _clientRepository;
+        private readonly CarRepository _carRepository;
+        private readonly ClientRepository _clientRepository;
         private readonly IMapper _mapper;
         private readonly ICacheService _cacheService;
 
-        public CarService(IRepository<Car> carRepository, IMapper mapper
-            ,IRepository<Client> clientRepository, ICacheService cacheService)
+        public CarService(CarRepository carRepository, IMapper mapper
+            ,ClientRepository clientRepository, ICacheService cacheService)
         {
             _carRepository = carRepository;
             _mapper = mapper;
@@ -48,6 +49,15 @@ namespace CarSales.Services.CarServices
             insertedCar.ClientId = client.Id;
             insertedCar.Client = client;
 
+            //if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+            //    _cacheService.Remove("SellingCars");
+            if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
+            {
+                _cacheService.Remove("MonthlyReport");
+                var report = await MonthlyReport();
+                _cacheService.Set("MonthlyReport", report);
+            }
+
             if (await _carRepository.Get(x => x.VinCode == car.VinCode && x.DeletedAt != null && x.Client.IdentityNumber == IdentityNumber) != null)
             {
                 return await _carRepository.Update(insertedCar);
@@ -56,15 +66,10 @@ namespace CarSales.Services.CarServices
             return await _carRepository.Insert(insertedCar);
         }
 
-        public async Task<bool> BuyCar(string IdentityNum, string VinCode)
+        public async Task<bool> BuyCar(IdentifyingData input)
         {
-            if (!InputValidator.IsValidIdentityNumber(IdentityNum) || !InputValidator.IsValidVinCode(VinCode))
-            {
-                throw new InvalidInputException();
-            }
-
-            var client = await _clientRepository.Get(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null);
-            var car = await _carRepository.Get(x => x.VinCode == VinCode && x.DeletedAt == null);
+            var client = await _clientRepository.Get(x => x.IdentityNumber == input.IdentityNumber && x.DeletedAt == null);
+            var car = await _carRepository.Get(x => x.VinCode == input.VinCode && x.DeletedAt == null);
             if(client.Id == car.ClientId || car.IsSold == true)
             {
                 throw new CouldNotBuyCarException();
@@ -72,50 +77,56 @@ namespace CarSales.Services.CarServices
             car.IsSold = true;
             car.FinishedSale = DateTime.Now;
             await _carRepository.Update(car);
-            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-                _cacheService.Remove("SellingCars");
+            //if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+            //    _cacheService.Remove("SellingCars");
             if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
+            {
                 _cacheService.Remove("MonthlyReport");
+                var report = await MonthlyReport();
+                _cacheService.Set("MonthlyReport", report);
+            }
+               
             return true;
         }
 
 
-        public async Task DeleteCar(string IdentityNum, string VinCode)
+        public async Task DeleteCar(IdentifyingData input)
         {
-            if(!InputValidator.IsValidIdentityNumber(IdentityNum) && !InputValidator.IsValidVinCode(VinCode))
-            {
-                throw new InvalidInputException();
-            }
-            var client = await _clientRepository.Get(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null);
-            var car = await _carRepository.Get(x => x.VinCode == VinCode && x.DeletedAt == null);
+            var client = await _clientRepository.Get(x => x.IdentityNumber == input.IdentityNumber && x.DeletedAt == null);
+            var car = await _carRepository.Get(x => x.VinCode == input.VinCode && x.DeletedAt == null);
             if(car.ClientId != client.Id)
             {
                 throw new CarDoesNotExistsException();
             }
             await _carRepository.Delete(car);
-            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-                _cacheService.Remove("SellingCars");
+            //if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+            //    _cacheService.Remove("SellingCars");
             if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
+            {
                 _cacheService.Remove("MonthlyReport");
+                var report = await MonthlyReport();
+                _cacheService.Set("MonthlyReport", report);
+            }
+                
         }
 
         public async Task<List<Car>> SellingCarsList(DateInput date)
         {
-            if(! _cacheService.TryGet("SellingCars", out List<Car> cars))
-            {
+            //if(! _cacheService.TryGet("SellingCars", out List<Car> cars))
+            //{
                 if (date.To < date.From)
                 {
                     throw new InvalidInputException();
                 }
-                cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false &&
+                var cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false &&
                              x.StartedSale >= date.From && x.FinishedSale <= date.To);
                 if (cars == null || cars.Count == 0)
                 {
                     throw new CarDoesNotExistsException();
                 }
 
-                _cacheService.Set("SellingCars", cars);
-            }
+            //    _cacheService.Set("SellingCars", cars);
+            //}
             
             return cars;
         }

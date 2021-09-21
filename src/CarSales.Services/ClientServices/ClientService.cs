@@ -2,6 +2,7 @@
 using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Repository;
+using CarSales.Repository.CustomRepositories;
 using CarSales.Repository.MemoryCacheService;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Services.DTOs;
@@ -17,11 +18,11 @@ namespace CarSales.Services.ClientServices
 {
     public class ClientService : IClientService
     {
-        private readonly IRepository<Client> _clientRepo;
+        private readonly ClientRepository _clientRepo;
         private readonly IMapper _mapper;
         private readonly ICacheService _cacheService;
 
-        public ClientService(IMapper mapper, IRepository<Client> clientRepo, ICacheService cacheService)
+        public ClientService(IMapper mapper, ClientRepository clientRepo, ICacheService cacheService)
         {
             _clientRepo = clientRepo;
             _mapper = mapper;
@@ -41,6 +42,7 @@ namespace CarSales.Services.ClientServices
                  return await UpdateClient(client);
 
             var insertedClient = _mapper.Map<Client>(client);
+
             return await _clientRepo.Insert(insertedClient);
         }
 

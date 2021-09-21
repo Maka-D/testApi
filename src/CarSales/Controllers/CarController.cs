@@ -32,18 +32,18 @@ namespace CarSales.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteCar(string IdentityNumber, string VinCode)
+        public async Task<IActionResult> DeleteCar(IdentifyingData data)
         {
 
-            await _carService.DeleteCar(IdentityNumber, VinCode);          
+            await _carService.DeleteCar(data);          
             return Ok("Successfully Deleted");
 
         }
 
         [HttpPost("BuyCar")]
-        public async Task<IActionResult> BuyCar(string IdentityNumber, string VinCode)
+        public async Task<IActionResult> BuyCar(IdentifyingData data)
         {
-            await _carService.BuyCar(IdentityNumber, VinCode);
+            await _carService.BuyCar(data);
             return Ok();
         }
 
