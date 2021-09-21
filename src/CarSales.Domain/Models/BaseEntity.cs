@@ -10,7 +10,7 @@ namespace CarSales.Domain.Models
     {
         public int Id { get; set; }
         public DateTime? CreationDate { get; set; }
-        public DateTime? ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }       
         public DateTime? DeletedAt { get; set; }
     }
 }

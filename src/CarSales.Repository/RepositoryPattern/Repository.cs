@@ -1,5 +1,6 @@
 ﻿using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
+using CarSales.Repository.MemoryCacheService;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,35 +13,29 @@ namespace CarSales.Repository.RepositoryPattern
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly AppDbContext _appDbContext;
-        private  DbSet<T> _entities;
+        private readonly DbSet<T> _entities;
+        private readonly ICacheService _cache;
+        //private string cacheKey = $"{typeof(T)}";
 
         public Repository(AppDbContext appDbContext)
+            //, ICacheService cache)
         {
             _appDbContext = appDbContext;
             _entities = _appDbContext.Set<T>();
+            //_cache = cache;
         }
 
         public async Task<T> Insert(T entity)
         {
             if (entity == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(entity));
             }
-            if(await _entities.Where(x => x.Id == entity.Id && x.DeletedAt == null).AnyAsync())
-            {
-                ThrowEntityExistsExceptions(entity);
-            }
-            else if (await _entities.Where(x => x.Id == entity.Id && x.DeletedAt != null).AnyAsync())
-            {
-                entity.DeletedAt = null;
-                _entities.Update(entity);
-            }
-            else
-            {
-                _entities.Add(entity);
-            }
-                
+
+            _entities.Add(entity);
+
             await _appDbContext.SaveChangesAsync();
+
             return entity;
         }
 
@@ -48,7 +43,7 @@ namespace CarSales.Repository.RepositoryPattern
         {
             if (entity == null)
             {
-                throw new ArgumentNullException("entity");
+                throw new ArgumentNullException(nameof(entity));
             }
             if (entity is Client)
             {
@@ -65,49 +60,54 @@ namespace CarSales.Repository.RepositoryPattern
             }
             _entities.Remove(entity);
             await _appDbContext.SaveChangesAsync();
+            //if(_cache.TryGet($"{typeof(T)}" + entity.Id.ToString(), out entity))
+            //    _cache.Remove($"{typeof(T)}" + entity.Id.ToString());
+
         }
 
         public async Task<T> Get(Func<T, bool> predicate)
         {
+
             var entity = await Task.FromResult(_entities.Where(predicate).FirstOrDefault());
-            if(entity == null)
+            if (entity == null)
             {
                 ThrowEntityDoesNotExistsExceptions(entity);
             }
+
             return entity;
+
         }
 
         public async Task<List<T>> GetByCondition(Func<T, bool> predicate)
         {
-            if (typeof(T) == typeof(Car))
-            {
-                var cars = (IEnumerable<T>)_appDbContext.Cars.Include("Client").Where((Func<Car, bool>)predicate).ToList();                
-                return await Task.FromResult(cars.ToList());
-            }
-            return await Task.FromResult(_entities.Where(predicate).ToList());
+            //if(! _cache.TryGet(predicate.ToString(),out IEnumerable<T> entities))
+            //{
+            IEnumerable<T> entities;
+                if (typeof(T) == typeof(Car))
+                {
+                    entities = (IEnumerable<T>)_appDbContext.Cars.Include("Client").Where((Func<Car, bool>)predicate).ToList();                 
+                }
+                else
+                {
+                    entities = _entities.Where(predicate).ToList();
+                }
+            //    _cache.Set(predicate.ToString(), entities);
+            //}           
+            return   await Task.FromResult(entities.ToList());
         }
 
         public async Task<T> Update(T entity)
         {
             if (entity == null)
             {
-                throw new ArgumentNullException("entity");
+                throw new ArgumentNullException(nameof(entity));
             }
-            if (await Get(x => x.Id == entity.Id && x.DeletedAt == null) == null)
-            {
-                ThrowEntityDoesNotExistsExceptions(entity);
-            }
+
             _entities.Update(entity);
             await _appDbContext.SaveChangesAsync();
+            //_cache.Remove($"{typeof(T)}" + entity.Id.ToString());
+            //_cache.Set($"{typeof(T)}" + entity.Id.ToString(), entity);
             return entity;
-        }
-
-        private static void ThrowEntityExistsExceptions(T entity)
-        {
-            if (typeof(T) == typeof(Client))
-                throw new ClientAlreadyExistsException();
-            else
-                throw new CarAlreadyExistsException();
         }
 
         private static void ThrowEntityDoesNotExistsExceptions(T entity)
@@ -117,5 +117,7 @@ namespace CarSales.Repository.RepositoryPattern
             else
                 throw new CarDoesNotExistsException();
         }
+
+        
     }
 }

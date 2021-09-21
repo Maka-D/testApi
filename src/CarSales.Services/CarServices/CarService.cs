@@ -3,6 +3,7 @@ using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
 using CarSales.Repository;
+using CarSales.Repository.MemoryCacheService;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Services.ClientServices;
 using CarSales.Services.DTOs;
@@ -21,13 +22,15 @@ namespace CarSales.Services.CarServices
         private readonly IRepository<Car> _carRepository;
         private readonly IRepository<Client> _clientRepository;
         private readonly IMapper _mapper;
+        private readonly ICacheService _cacheService;
 
         public CarService(IRepository<Car> carRepository, IMapper mapper
-            ,IRepository<Client> clientRepository)
+            ,IRepository<Client> clientRepository, ICacheService cacheService)
         {
             _carRepository = carRepository;
             _mapper = mapper;
             _clientRepository = clientRepository;
+            _cacheService = cacheService;
         }
         public async Task<Car> AddCar(string IdentityNumber, CarInput car)
         {
@@ -37,9 +40,18 @@ namespace CarSales.Services.CarServices
             }
             var client = await _clientRepository.Get(x => x.IdentityNumber == IdentityNumber && x.DeletedAt == null);
 
+            
+            if (await _carRepository.Get(x => x.VinCode == car.VinCode && x.DeletedAt == null) != null)
+                throw new CarAlreadyExistsException();
+
             var insertedCar = _mapper.Map<Car>(car);
             insertedCar.ClientId = client.Id;
             insertedCar.Client = client;
+
+            if (await _carRepository.Get(x => x.VinCode == car.VinCode && x.DeletedAt != null && x.Client.IdentityNumber == IdentityNumber) != null)
+            {
+                return await _carRepository.Update(insertedCar);
+            }          
 
             return await _carRepository.Insert(insertedCar);
         }
@@ -60,6 +72,10 @@ namespace CarSales.Services.CarServices
             car.IsSold = true;
             car.FinishedSale = DateTime.Now;
             await _carRepository.Update(car);
+            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+                _cacheService.Remove("SellingCars");
+            if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
+                _cacheService.Remove("MonthlyReport");
             return true;
         }
 
@@ -77,50 +93,66 @@ namespace CarSales.Services.CarServices
                 throw new CarDoesNotExistsException();
             }
             await _carRepository.Delete(car);
+            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+                _cacheService.Remove("SellingCars");
+            if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
+                _cacheService.Remove("MonthlyReport");
         }
 
         public async Task<List<Car>> SellingCarsList(DateInput date)
         {
-            if(date.To < date.From)
+            if(! _cacheService.TryGet("SellingCars", out List<Car> cars))
             {
-                throw new InvalidInputException();
+                if (date.To < date.From)
+                {
+                    throw new InvalidInputException();
+                }
+                cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false &&
+                             x.StartedSale >= date.From && x.FinishedSale <= date.To);
+                if (cars == null || cars.Count == 0)
+                {
+                    throw new CarDoesNotExistsException();
+                }
+
+                _cacheService.Set("SellingCars", cars);
             }
-            var cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false &&
-                         x.StartedSale >= date.From && x.FinishedSale <= date.To);
-            if(cars == null || cars.Count == 0)
-            {
-                throw new CarDoesNotExistsException();
-            }
+            
             return cars;
         }
 
         public async Task<List<ReportData>> MonthlyReport()
         {
-            var carGroups = await  _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == true);
-
-            var filteredCars = carGroups.GroupBy(x => x.FinishedSale.Month).Select(x => new { month = x.Key, Cars = x.ToList() }).ToList();
-
-            if (filteredCars == null)
+            if(! _cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
             {
-                throw new CarDoesNotExistsException();
-            }
+                var carGroups = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == true);
 
-            var reports = new List<ReportData>();
+                var filteredCars = carGroups.GroupBy(x => x.FinishedSale.Month).Select(x => new { month = x.Key, Cars = x.ToList() }).ToList();
 
-            foreach (var car in filteredCars)
-            {
-                var report = new ReportData
+                if (filteredCars == null)
                 {
-                    Month = car.month,
-                    CarsAmount = car.Cars.Count
-                };
-                foreach (var item in car.Cars)
-                {
-                    report.CarsPrice += item.Price;
+                    throw new CarDoesNotExistsException();
                 }
-                report.AveragePrice = (double)report.CarsPrice / report.CarsAmount;
-                reports.Add(report);
+
+                reports = new List<ReportData>();
+
+                foreach (var car in filteredCars)
+                {
+                    var report = new ReportData
+                    {
+                        Month = car.month,
+                        CarsAmount = car.Cars.Count
+                    };
+                    foreach (var item in car.Cars)
+                    {
+                        report.CarsPrice += item.Price;
+                    }
+                    report.AveragePrice = (double)report.CarsPrice / report.CarsAmount;
+                    reports.Add(report);
+                }
+
+                _cacheService.Set("MonthlyReport", reports);
             }
+            
 
             return reports;
         }

@@ -2,6 +2,7 @@
 using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Repository;
+using CarSales.Repository.MemoryCacheService;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Services.DTOs;
 using CarSales.Services.ValidateInput;
@@ -18,38 +19,72 @@ namespace CarSales.Services.ClientServices
     {
         private readonly IRepository<Client> _clientRepo;
         private readonly IMapper _mapper;
+        private readonly ICacheService _cacheService;
 
-        public ClientService(IMapper mapper, IRepository<Client> clientRepo)
+        public ClientService(IMapper mapper, IRepository<Client> clientRepo, ICacheService cacheService)
         {
             _clientRepo = clientRepo;
             _mapper = mapper;
+            _cacheService = cacheService;
         }
         public async Task<Client> AddClient(ClientInput client)
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException(nameof(client));
             }
-            return await _clientRepo.Insert(_mapper.Map<Client>(client));
+
+            if (await _clientRepo.Get(x => x.IdentityNumber == client.IdentityNumber && x.DeletedAt == null) != null)
+                throw new ClientAlreadyExistsException();           
+
+            if (await _clientRepo.Get(x => x.IdentityNumber == client.IdentityNumber && x.DeletedAt != null) != null)
+                 return await UpdateClient(client);
+
+            var insertedClient = _mapper.Map<Client>(client);
+            return await _clientRepo.Insert(insertedClient);
         }
 
-        public async Task UpdateClient(ClientInput client)
+        public async Task<Client> UpdateClient(ClientInput client)
         {
             if (client == null)
             {
-                throw new ArgumentNullException("client");
+                throw new ArgumentNullException(nameof(client));
             }
-            
-            await _clientRepo.Update(_mapper.Map<Client>(client));
+
+            var clientToUpdate = await _clientRepo.Get(x => x.IdentityNumber == client.IdentityNumber && x.DeletedAt == null);
+
+            if (clientToUpdate == null)
+                throw new ClientDoesNotExistsException();
+
+            if (_cacheService.TryGet(clientToUpdate.IdentityNumber, out Client cachedClient))
+                _cacheService.Remove(clientToUpdate.IdentityNumber);
+
+            clientToUpdate.FirstName = client.FirstName;
+            clientToUpdate.SecondName = client.SecondName;
+            clientToUpdate.PhoneNumber = client.PhoneNumber;
+            clientToUpdate.Address = client.Address;
+            clientToUpdate.BirthDate = client.BirthDate;
+            clientToUpdate.Email = client.Email;
+
+            _cacheService.Set(clientToUpdate.IdentityNumber, clientToUpdate);
+
+            return await _clientRepo.Update(clientToUpdate);
+
         }
 
         public async Task<Client> FindClient(string IdentityNum)
         {
-            if (!InputValidator.IsValidIdentityNumber(IdentityNum))
+            if(!_cacheService.TryGet(IdentityNum, out Client client))
             {
-                throw new InvalidInputException();
+                if (!InputValidator.IsValidIdentityNumber(IdentityNum))
+                {
+                    throw new InvalidInputException();
+                }
+                client = await _clientRepo.Get(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null);
+
+                _cacheService.Set(IdentityNum, client);
             }
-            return await _clientRepo.Get(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null);
+            return client;
             
         }
 
@@ -60,6 +95,8 @@ namespace CarSales.Services.ClientServices
                 throw new InvalidInputException();
             }
             await _clientRepo.Delete(await _clientRepo.Get(x => x.IdentityNumber == IdenNum && x.DeletedAt == null));
+            if (_cacheService.TryGet(IdenNum, out Client client))
+                _cacheService.Remove(IdenNum);
         }
 
     }

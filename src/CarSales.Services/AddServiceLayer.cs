@@ -29,8 +29,7 @@ namespace CarSales.Services
                 .AddAutoMapper(typeof(MapperProfile))
                 .AddScoped(typeof(IValidator<ClientInput>), typeof(ClientInputValidation))
                 .AddScoped(typeof(IValidator<CarInput>), typeof(CarInputValidation))
-                .AddScoped(typeof(IValidator<DateInput>), typeof(DateInputValidation))
-                .AddMemoryCache();
+                .AddScoped(typeof(IValidator<DateInput>), typeof(DateInputValidation));
         }
     }
 }

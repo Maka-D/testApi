@@ -81,3 +81,41 @@
 09/17/2021 18:22:07 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1389 ms
 09/17/2021 18:23:13 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 52459.7131 ms
 09/17/2021 18:23:44 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 18380.6333 ms
+09/20/2021 17:49:53 +04:00 An error occurred while updating the entries. See the inner exception for details.
+09/20/2021 17:49:53 +04:00 HTTP "POST" "/Client" responded 500 in 4112.5267 ms
+09/20/2021 17:52:47 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.2594 ms
+09/20/2021 17:52:47 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1418 ms
+09/20/2021 17:53:40 +04:00 Coud not find such client!
+09/20/2021 17:53:43 +04:00 HTTP "PUT" "/Client" responded 400 in 28915.9092 ms
+09/20/2021 17:54:11 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.8768 ms
+09/20/2021 17:54:11 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1035 ms
+09/20/2021 17:55:08 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.3281 ms
+09/20/2021 17:55:08 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1350 ms
+09/20/2021 17:55:27 +04:00 HTTP "GET" "/Car" responded 200 in 3062.4613 ms
+09/21/2021 12:44:52 +04:00 An error occurred while updating the entries. See the inner exception for details.
+09/21/2021 12:44:52 +04:00 HTTP "PUT" "/Client" responded 500 in 86191.6981 ms
+09/21/2021 13:18:53 +04:00 HTTP "PUT" "/Client" responded 200 in 3149.7336 ms
+09/21/2021 14:20:08 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 7.4696 ms
+09/21/2021 14:20:09 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2233 ms
+09/21/2021 14:20:48 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 24190.2322 ms
+09/21/2021 14:21:14 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 17799.7103 ms
+09/21/2021 14:21:47 +04:00 The instance of entity type 'Client' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+09/21/2021 14:21:47 +04:00 HTTP "PUT" "/Client" responded 500 in 459.1039 ms
+09/21/2021 14:24:04 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.7270 ms
+09/21/2021 14:24:04 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1300 ms
+09/21/2021 14:25:25 +04:00 Object reference not set to an instance of an object.
+09/21/2021 14:25:28 +04:00 HTTP "PUT" "/Client" responded 500 in 68464.4043 ms
+09/21/2021 14:28:07 +04:00 Object reference not set to an instance of an object.
+09/21/2021 14:28:07 +04:00 HTTP "PUT" "/Client" responded 500 in 2692.5005 ms
+09/21/2021 14:29:00 +04:00 Object reference not set to an instance of an object.
+09/21/2021 14:29:00 +04:00 HTTP "PUT" "/Client" responded 500 in 54.5579 ms
+09/21/2021 14:30:11 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 7.6703 ms
+09/21/2021 14:30:11 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.6592 ms
+09/21/2021 14:33:17 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.0561 ms
+09/21/2021 14:33:18 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1921 ms
+09/21/2021 14:34:31 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 4.0524 ms
+09/21/2021 14:34:31 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1248 ms
+09/21/2021 14:36:39 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 4.7212 ms
+09/21/2021 14:36:39 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2090 ms
+09/21/2021 14:37:34 +04:00 HTTP "PUT" "/Client" responded 200 in 30649.6953 ms
+09/21/2021 14:38:07 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 200 in 15771.3678 ms

@@ -1,4 +1,5 @@
 ﻿using CarSales.Domain.Models;
+using CarSales.Repository.MemoryCacheService;
 using CarSales.Repository.RepositoryPattern;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,9 @@ namespace CarSales.Repository
         {
             return services
                 .AddScoped(typeof(IRepository<Client>), typeof(Repository<Client>))
-                .AddScoped(typeof(IRepository<Car>), typeof(Repository<Car>));
+                .AddScoped(typeof(IRepository<Car>), typeof(Repository<Car>))
+                .AddTransient(typeof(ICacheService), typeof(InMemoryCacheService))
+                .AddMemoryCache();
         }
     }
 }

@@ -19,29 +19,17 @@ namespace CarSales.Controllers
     {
         
         private readonly IClientService _clientService;
-        private readonly IMemoryCache _memoryCache;
 
-        public ClientController(IClientService clientService, IMemoryCache memoryCache)
+        public ClientController(IClientService clientService)
         {
             _clientService = clientService;
-            _memoryCache = memoryCache;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetClient(string IdentityNumber)
         {
-            var cacheKey = IdentityNumber;
-            if(! _memoryCache.TryGetValue(cacheKey, out Client client))
-            {
-                client = await _clientService.FindClient(IdentityNumber);
-                var cacheEpiringOptions = new MemoryCacheEntryOptions
-                {
-                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),
-                    SlidingExpiration = TimeSpan.FromMinutes(1)
-                };
-                _memoryCache.Set(cacheKey, client, cacheEpiringOptions);
-            }
-                       
+
+            var client = await _clientService.FindClient(IdentityNumber);
             return Ok(client);
 
         }
@@ -50,7 +38,7 @@ namespace CarSales.Controllers
         public async Task<IActionResult> RegisterClient(ClientInput client)
         {
             var createdClient = await _clientService.AddClient(client);
-                return Ok(createdClient);
+            return Ok(createdClient);
         }
 
         [HttpPut]
