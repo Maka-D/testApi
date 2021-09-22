@@ -49,8 +49,8 @@ namespace CarSales.Services.CarServices
             insertedCar.ClientId = client.Id;
             insertedCar.Client = client;
 
-            //if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-            //    _cacheService.Remove("SellingCars");
+            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+                _cacheService.Remove("SellingCars");
             if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
             {
                 _cacheService.Remove("MonthlyReport");
@@ -77,8 +77,8 @@ namespace CarSales.Services.CarServices
             car.IsSold = true;
             car.FinishedSale = DateTime.Now;
             await _carRepository.Update(car);
-            //if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-            //    _cacheService.Remove("SellingCars");
+            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+                _cacheService.Remove("SellingCars");
             if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
             {
                 _cacheService.Remove("MonthlyReport");
@@ -99,8 +99,8 @@ namespace CarSales.Services.CarServices
                 throw new CarDoesNotExistsException();
             }
             await _carRepository.Delete(car);
-            //if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-            //    _cacheService.Remove("SellingCars");
+            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
+                _cacheService.Remove("SellingCars");
             if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
             {
                 _cacheService.Remove("MonthlyReport");
@@ -112,23 +112,36 @@ namespace CarSales.Services.CarServices
 
         public async Task<List<Car>> SellingCarsList(DateInput date)
         {
-            //if(! _cacheService.TryGet("SellingCars", out List<Car> cars))
-            //{
-                if (date.To < date.From)
-                {
-                    throw new InvalidInputException();
-                }
-                var cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false &&
-                             x.StartedSale >= date.From && x.FinishedSale <= date.To);
+
+            if (date.To < date.From)
+            {
+                throw new InvalidInputException();
+            }
+            if (!_cacheService.TryGet("SellingCars", out List<Car> cars))
+            {
+                cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false);
                 if (cars == null || cars.Count == 0)
                 {
                     throw new CarDoesNotExistsException();
                 }
 
-            //    _cacheService.Set("SellingCars", cars);
-            //}
-            
-            return cars;
+                _cacheService.Set("SellingCars", cars);
+            }
+
+            var filteredCache = new List<Car>();
+
+            foreach(var car in cars)
+            {
+                if (car.StartedSale >= date.From && car.FinishedSale <= date.To)
+                    filteredCache.Add(car);
+            }
+
+            if (filteredCache == null || filteredCache.Count == 0)
+            {
+                throw new CarDoesNotExistsException();
+            }
+
+            return filteredCache;
         }
 
         public async Task<List<ReportData>> MonthlyReport()

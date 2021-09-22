@@ -205,3 +205,5 @@ System.AggregateException: Some services are not able to be constructed (Error w
 09/21/2021 18:23:40 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 15.0232 ms
 09/21/2021 18:23:49 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 26.6699 ms
 09/21/2021 18:24:22 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 3.2237 ms
+09/22/2021 10:50:54 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 3650.7063 ms
+09/22/2021 10:51:20 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 56.9131 ms
