@@ -353,3 +353,34 @@ System.AggregateException: Some services are not able to be constructed (Error w
 09/23/2021 15:11:14 +04:00 HTTP "DELETE" "/Client?IdentityNumber=12121212121" responded 200 in 28212.5161 ms
 09/23/2021 15:11:41 +04:00 Coud not find such client!
 09/23/2021 15:11:43 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 400 in 19287.2053 ms
+09/23/2021 15:27:19 +04:00 HTTP "GET" "/Car" responded 200 in 3383.9330 ms
+09/23/2021 15:27:52 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.3798 ms
+09/23/2021 15:27:52 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2836 ms
+09/23/2021 15:28:35 +04:00 HTTP "GET" "/Car" responded 200 in 36436.1063 ms
+09/23/2021 15:29:30 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.8320 ms
+09/23/2021 15:29:30 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2329 ms
+09/23/2021 15:30:24 +04:00 HTTP "GET" "/Car" responded 200 in 43238.3001 ms
+09/23/2021 15:33:12 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 6.0273 ms
+09/23/2021 15:33:13 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 1.3042 ms
+09/23/2021 15:34:45 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.8629 ms
+09/23/2021 15:34:45 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1267 ms
+09/23/2021 15:36:01 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.2338 ms
+09/23/2021 15:36:02 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1706 ms
+09/23/2021 15:37:53 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 4.2131 ms
+09/23/2021 15:37:54 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1883 ms
+09/23/2021 15:38:15 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.6140 ms
+09/23/2021 15:38:15 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2626 ms
+09/23/2021 15:38:41 +04:00 Could not find such car!
+09/23/2021 15:38:41 +04:00 HTTP "GET" "/Car" responded 400 in 19641.3555 ms
+09/23/2021 15:39:53 +04:00 Could not buy the car!
+09/23/2021 15:39:53 +04:00 HTTP "POST" "/Car/BuyCar" responded 400 in 3010.1136 ms
+09/23/2021 15:40:06 +04:00 Object reference not set to an instance of an object.
+09/23/2021 15:40:06 +04:00 HTTP "POST" "/Car/BuyCar" responded 500 in 52.4007 ms
+09/23/2021 15:40:36 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 7.4631 ms
+09/23/2021 15:40:36 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2481 ms
+09/23/2021 15:41:42 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.7379 ms
+09/23/2021 15:41:42 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2849 ms
+09/23/2021 15:42:09 +04:00 Coud not find such client!
+09/23/2021 15:42:12 +04:00 HTTP "POST" "/Car/BuyCar" responded 400 in 17332.6531 ms
+09/23/2021 15:43:24 +04:00 HTTP "POST" "/Car/BuyCar" responded 200 in 43117.8331 ms
+09/23/2021 15:43:55 +04:00 HTTP "GET" "/Car" responded 200 in 14972.2198 ms

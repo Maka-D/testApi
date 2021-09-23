@@ -20,7 +20,7 @@ namespace CarSales.Repository.CustomRepositories
         public new async Task<List<Car>> GetByCondition(Func<Car, bool> predicate)
         {
 
-            var  entities =  _appDbContext.Cars.Include("Client").Where((Func<Car, bool>)predicate).ToList();
+            var  entities =  _appDbContext.Cars.Include("Client").Where(predicate).ToList();
 
             return await Task.FromResult(entities.ToList());
         }

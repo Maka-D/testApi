@@ -62,7 +62,11 @@ namespace CarSales.Services.CarServices
         public async Task<bool> BuyCar(IdentifyingData input)
         {
             var client = await _clientRepository.Get(x => x.IdentityNumber == input.IdentityNumber && x.DeletedAt == null);
+            if (client == null)
+                throw new ClientDoesNotExistsException();
             var car = await _carRepository.Get(x => x.VinCode == input.VinCode && x.DeletedAt == null);
+            if (car == null)
+                throw new CarDoesNotExistsException();
             if(client.Id == car.ClientId || car.IsSold == true)
             {
                 throw new CouldNotBuyCarException();
@@ -134,7 +138,7 @@ namespace CarSales.Services.CarServices
 
                 var filteredCars = carGroups.GroupBy(x => x.FinishedSale.Month).Select(x => new { month = x.Key, Cars = x.ToList() }).ToList();
 
-                if (filteredCars == null)
+                if (filteredCars == null || filteredCars.Count == 0)
                 {
                     throw new CarDoesNotExistsException();
                 }
@@ -158,7 +162,7 @@ namespace CarSales.Services.CarServices
             }
             
 
-            return cachedReport;
+            return cachedReport.ToList();
         }
 
         private async Task<List<Car>> GetAllSellingCars()
@@ -182,7 +186,7 @@ namespace CarSales.Services.CarServices
                 await _cacheService.Set("SellingCars", cachedSellingCars);
             }
 
-            return cachedSellingCars;
+            return cachedSellingCars.ToList();
         }
 
         private async Task CheckCarCache()
