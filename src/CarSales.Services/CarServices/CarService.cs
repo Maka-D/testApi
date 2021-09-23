@@ -4,9 +4,7 @@ using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
 using CarSales.Repository;
 using CarSales.Repository.CustomRepositories;
-using CarSales.Repository.MemoryCacheService;
-using CarSales.Repository.RepositoryPattern;
-using CarSales.Services.ClientServices;
+using CarSales.Repository.CacheService;
 using CarSales.Services.DTOs;
 using CarSales.Services.ValidateInput;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace CarSales.Services.CarServices
 {
@@ -49,14 +48,8 @@ namespace CarSales.Services.CarServices
             insertedCar.ClientId = client.Id;
             insertedCar.Client = client;
 
-            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-                _cacheService.Remove("SellingCars");
-            if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
-            {
-                _cacheService.Remove("MonthlyReport");
-                var report = await MonthlyReport();
-                _cacheService.Set("MonthlyReport", report);
-            }
+            //checks for car caches, deletes and restores it 
+            await CheckCarCache();
 
             if (await _carRepository.Get(x => x.VinCode == car.VinCode && x.DeletedAt != null && x.Client.IdentityNumber == IdentityNumber) != null)
             {
@@ -77,15 +70,10 @@ namespace CarSales.Services.CarServices
             car.IsSold = true;
             car.FinishedSale = DateTime.Now;
             await _carRepository.Update(car);
-            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-                _cacheService.Remove("SellingCars");
-            if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
-            {
-                _cacheService.Remove("MonthlyReport");
-                var report = await MonthlyReport();
-                _cacheService.Set("MonthlyReport", report);
-            }
-               
+
+            //checks for car caches, deletes and restores it 
+            await CheckCarCache();
+
             return true;
         }
 
@@ -99,15 +87,9 @@ namespace CarSales.Services.CarServices
                 throw new CarDoesNotExistsException();
             }
             await _carRepository.Delete(car);
-            if (_cacheService.TryGet("SellingCars", out List<Car> cars))
-                _cacheService.Remove("SellingCars");
-            if (_cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
-            {
-                _cacheService.Remove("MonthlyReport");
-                var report = await MonthlyReport();
-                _cacheService.Set("MonthlyReport", report);
-            }
-                
+
+            //checks for car caches, deletes and restores it 
+            await CheckCarCache();
         }
 
         public async Task<List<Car>> SellingCarsList(DateInput date)
@@ -117,20 +99,24 @@ namespace CarSales.Services.CarServices
             {
                 throw new InvalidInputException();
             }
-            if (!_cacheService.TryGet("SellingCars", out List<Car> cars))
+
+            //gets list of all selling cars from cache or database
+            var cachedSellingCars = JsonConvert.DeserializeObject<List<Car>>(await _cacheService.Get("SellingCars"));
+
+            if (cachedSellingCars == null)
             {
-                cars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false);
-                if (cars == null || cars.Count == 0)
+                cachedSellingCars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false);
+                if (cachedSellingCars == null || cachedSellingCars.Count == 0)
                 {
                     throw new CarDoesNotExistsException();
                 }
 
-                _cacheService.Set("SellingCars", cars);
+                await _cacheService.Set("SellingCars", cachedSellingCars);
             }
 
             var filteredCache = new List<Car>();
 
-            foreach(var car in cars)
+            foreach(var car in cachedSellingCars)
             {
                 if (car.StartedSale >= date.From && car.FinishedSale <= date.To)
                     filteredCache.Add(car);
@@ -146,7 +132,9 @@ namespace CarSales.Services.CarServices
 
         public async Task<List<ReportData>> MonthlyReport()
         {
-            if(! _cacheService.TryGet("MonthlyReport", out List<ReportData> reports))
+            var cachedReport = JsonConvert.DeserializeObject<List<ReportData>>(await _cacheService.Get("MonthlyReport"));
+
+            if (cachedReport == null)
             {
                 var carGroups = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == true);
 
@@ -157,7 +145,7 @@ namespace CarSales.Services.CarServices
                     throw new CarDoesNotExistsException();
                 }
 
-                reports = new List<ReportData>();
+                cachedReport = new List<ReportData>();
 
                 foreach (var car in filteredCars)
                 {
@@ -171,14 +159,49 @@ namespace CarSales.Services.CarServices
                         report.CarsPrice += item.Price;
                     }
                     report.AveragePrice = (double)report.CarsPrice / report.CarsAmount;
-                    reports.Add(report);
+                    cachedReport.Add(report);
                 }
 
-                _cacheService.Set("MonthlyReport", reports);
+                await _cacheService.Set("MonthlyReport", cachedReport);
             }
             
 
-            return reports;
+            return cachedReport;
+        }
+
+        private async Task<List<Car>> GetAllSellingCars()
+        {
+            var cachedSellingCars = JsonConvert.DeserializeObject<List<Car>>(await _cacheService.Get("SellingCars"));
+
+            if (cachedSellingCars == null)
+            {
+                cachedSellingCars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false);
+                if (cachedSellingCars == null || cachedSellingCars.Count == 0)
+                {
+                    throw new CarDoesNotExistsException();
+                }
+
+                await _cacheService.Set("SellingCars", cachedSellingCars);
+            }
+
+            return cachedSellingCars;
+        }
+
+        private async Task CheckCarCache()
+        {
+            var cachedSellingCars = await _cacheService.Get("SellingCars");
+            if (cachedSellingCars != null)
+            {
+                await _cacheService.Remove("SellingCars");
+                await _cacheService.Set("SellingCars", await GetAllSellingCars());
+            }
+               
+            var cachedReport = await _cacheService.Get("MonthlyReport");
+            if (cachedReport != null)
+            {
+                await _cacheService.Remove("MonthlyReport");
+                await _cacheService.Set("MonthlyReport", await MonthlyReport());
+            }
         }
     }
 

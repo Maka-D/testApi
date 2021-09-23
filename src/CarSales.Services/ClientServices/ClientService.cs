@@ -3,7 +3,7 @@ using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Repository;
 using CarSales.Repository.CustomRepositories;
-using CarSales.Repository.MemoryCacheService;
+using CarSales.Repository.CacheService;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Services.DTOs;
 using CarSales.Services.ValidateInput;
@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace CarSales.Services.ClientServices
 {
@@ -58,8 +59,9 @@ namespace CarSales.Services.ClientServices
             if (clientToUpdate == null)
                 throw new ClientDoesNotExistsException();
 
-            if (_cacheService.TryGet(clientToUpdate.IdentityNumber, out Client cachedClient))
-                _cacheService.Remove(clientToUpdate.IdentityNumber);
+            var cachedClient = JsonConvert.DeserializeObject<Client>(await _cacheService.Get(client.IdentityNumber));
+            if (cachedClient != null)
+                await _cacheService.Remove(clientToUpdate.IdentityNumber);
 
             clientToUpdate.FirstName = client.FirstName;
             clientToUpdate.SecondName = client.SecondName;
@@ -68,7 +70,7 @@ namespace CarSales.Services.ClientServices
             clientToUpdate.BirthDate = client.BirthDate;
             clientToUpdate.Email = client.Email;
 
-            _cacheService.Set(clientToUpdate.IdentityNumber, clientToUpdate);
+            await _cacheService.Set(clientToUpdate.IdentityNumber, clientToUpdate);
 
             return await _clientRepo.Update(clientToUpdate);
 
@@ -76,17 +78,20 @@ namespace CarSales.Services.ClientServices
 
         public async Task<Client> FindClient(string IdentityNum)
         {
-            if(!_cacheService.TryGet(IdentityNum, out Client client))
+            if (!InputValidator.IsValidIdentityNumber(IdentityNum))
             {
-                if (!InputValidator.IsValidIdentityNumber(IdentityNum))
-                {
-                    throw new InvalidInputException();
-                }
-                client = await _clientRepo.Get(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null);
-
-                _cacheService.Set(IdentityNum, client);
+                throw new InvalidInputException();
             }
-            return client;
+
+            var cachedClient = JsonConvert.DeserializeObject(await _cacheService.Get(IdentityNum));
+
+            if(cachedClient == null)
+            {
+                cachedClient = await _clientRepo.Get(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null);
+
+                await _cacheService.Set(IdentityNum, cachedClient);
+            }
+            return (Client)cachedClient;
             
         }
 
@@ -97,8 +102,11 @@ namespace CarSales.Services.ClientServices
                 throw new InvalidInputException();
             }
             await _clientRepo.Delete(await _clientRepo.Get(x => x.IdentityNumber == IdenNum && x.DeletedAt == null));
-            if (_cacheService.TryGet(IdenNum, out Client client))
-                _cacheService.Remove(IdenNum);
+
+            var cachedClient = JsonConvert.DeserializeObject<Client>(await _cacheService.Get(IdenNum));
+
+            if (cachedClient != null)
+                await _cacheService.Remove(IdenNum);
         }
 
     }
