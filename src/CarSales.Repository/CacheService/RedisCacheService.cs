@@ -37,8 +37,11 @@ namespace CarSales.Repository.CacheService
 
         public async Task<string> Get(string cacheKey)
         {
-            
-           return  Encoding.UTF8.GetString(await _redisCaching.GetAsync(cacheKey));
+            var cacheInBytes = await _redisCaching.GetAsync(cacheKey);
+            if (cacheInBytes == null)
+                return null;
+            return Encoding.UTF8.GetString(cacheInBytes);
+
 
         }
     }

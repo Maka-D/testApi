@@ -299,3 +299,57 @@ System.AggregateException: Some services are not able to be constructed (Error w
 09/23/2021 12:38:58 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 500 in 29201.5381 ms
 09/23/2021 12:48:59 +04:00 Value cannot be null. (Parameter 'value')
 09/23/2021 12:48:59 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 500 in 1065.8859 ms
+09/23/2021 12:54:56 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.2618 ms
+09/23/2021 12:54:56 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1371 ms
+09/23/2021 12:55:21 +04:00 Array cannot be null. (Parameter 'bytes')
+09/23/2021 12:55:21 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 500 in 13750.3802 ms
+09/23/2021 12:56:03 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.3576 ms
+09/23/2021 12:56:03 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2223 ms
+09/23/2021 12:56:31 +04:00 Value cannot be null. (Parameter 'value')
+09/23/2021 12:56:31 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 500 in 14432.8993 ms
+09/23/2021 13:03:52 +04:00 Value cannot be null. (Parameter 'value')
+09/23/2021 13:03:52 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 500 in 1865.2651 ms
+09/23/2021 13:05:07 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.5695 ms
+09/23/2021 13:05:07 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2579 ms
+09/23/2021 13:10:48 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.3844 ms
+09/23/2021 13:10:48 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.3704 ms
+09/23/2021 13:12:06 +04:00 Could not find such car!
+09/23/2021 13:12:06 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 67380.9846 ms
+09/23/2021 13:16:22 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 2400.7215 ms
+09/23/2021 14:01:27 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 3788.7751 ms
+09/23/2021 14:30:00 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.3075 ms
+09/23/2021 14:30:00 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1228 ms
+09/23/2021 14:30:54 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 33854.9438 ms
+09/23/2021 14:32:08 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.3555 ms
+09/23/2021 14:32:08 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1752 ms
+09/23/2021 14:33:00 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 41003.2512 ms
+09/23/2021 14:35:16 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.6335 ms
+09/23/2021 14:35:16 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2268 ms
+09/23/2021 14:35:58 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 29309.5969 ms
+09/23/2021 14:36:49 +04:00 HTTP "DELETE" "/Client?IdentityNumber=12121212121" responded 200 in 4005.1077 ms
+09/23/2021 14:37:03 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 204 in 87.4146 ms
+09/23/2021 14:37:42 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 6.0894 ms
+09/23/2021 14:37:42 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2439 ms
+09/23/2021 14:38:28 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 204 in 35923.4555 ms
+09/23/2021 14:40:45 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.9045 ms
+09/23/2021 14:40:45 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.7364 ms
+09/23/2021 14:41:18 +04:00 Coud not find such client!
+09/23/2021 14:41:18 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 400 in 20515.9738 ms
+09/23/2021 14:43:04 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.5329 ms
+09/23/2021 14:43:04 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1527 ms
+09/23/2021 14:44:00 +04:00 Coud not find such client!
+09/23/2021 14:44:16 +04:00 HTTP "POST" "/Client" responded 400 in 40073.8305 ms
+09/23/2021 14:45:27 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 6.9026 ms
+09/23/2021 14:45:27 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1946 ms
+09/23/2021 14:45:59 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.8175 ms
+09/23/2021 14:45:59 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1304 ms
+09/23/2021 14:49:24 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.6242 ms
+09/23/2021 14:49:24 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1968 ms
+09/23/2021 15:06:51 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 4.0938 ms
+09/23/2021 15:06:51 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2369 ms
+09/23/2021 15:09:20 +04:00 HTTP "POST" "/Client" responded 200 in 34306.9158 ms
+09/23/2021 15:09:23 +04:00 HTTP "POST" "/Client" responded 200 in 35585.3809 ms
+09/23/2021 15:10:29 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 200 in 27099.3376 ms
+09/23/2021 15:11:14 +04:00 HTTP "DELETE" "/Client?IdentityNumber=12121212121" responded 200 in 28212.5161 ms
+09/23/2021 15:11:41 +04:00 Coud not find such client!
+09/23/2021 15:11:43 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 400 in 19287.2053 ms

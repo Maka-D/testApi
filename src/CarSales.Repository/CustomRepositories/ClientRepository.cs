@@ -39,5 +39,26 @@ namespace CarSales.Repository.CustomRepositories
             await _appDbContext.SaveChangesAsync();
         }
 
+        public async Task<Client> UpdateDeletedClient(Client client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
+
+            var deletedClient = await _appDbContext.Clients.Where(x => x.IdentityNumber == client.IdentityNumber).FirstOrDefaultAsync();
+
+            deletedClient.DeletedAt = null;
+            deletedClient.FirstName = client.FirstName;
+            deletedClient.SecondName = client.SecondName;
+            deletedClient.PhoneNumber = client.PhoneNumber;
+            deletedClient.Address = client.Address;
+            deletedClient.BirthDate = client.BirthDate;
+            deletedClient.Email = client.Email;
+
+            await _appDbContext.SaveChangesAsync();
+            return deletedClient;
+        }
+
     }
 }

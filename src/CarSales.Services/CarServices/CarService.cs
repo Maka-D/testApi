@@ -101,18 +101,7 @@ namespace CarSales.Services.CarServices
             }
 
             //gets list of all selling cars from cache or database
-            var cachedSellingCars = JsonConvert.DeserializeObject<List<Car>>(await _cacheService.Get("SellingCars"));
-
-            if (cachedSellingCars == null)
-            {
-                cachedSellingCars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false);
-                if (cachedSellingCars == null || cachedSellingCars.Count == 0)
-                {
-                    throw new CarDoesNotExistsException();
-                }
-
-                await _cacheService.Set("SellingCars", cachedSellingCars);
-            }
+            var cachedSellingCars = await GetAllSellingCars();
 
             var filteredCache = new List<Car>();
 
@@ -132,9 +121,14 @@ namespace CarSales.Services.CarServices
 
         public async Task<List<ReportData>> MonthlyReport()
         {
-            var cachedReport = JsonConvert.DeserializeObject<List<ReportData>>(await _cacheService.Get("MonthlyReport"));
+            var deserializableString = await _cacheService.Get("MonthlyReport");
 
-            if (cachedReport == null)
+            var cachedReport = new List<ReportData>();
+
+            if (!string.IsNullOrEmpty(deserializableString))
+                cachedReport = JsonConvert.DeserializeObject<List<ReportData>>(deserializableString);
+
+            if (cachedReport == null || cachedReport.Count == 0)
             {
                 var carGroups = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == true);
 
@@ -144,8 +138,6 @@ namespace CarSales.Services.CarServices
                 {
                     throw new CarDoesNotExistsException();
                 }
-
-                cachedReport = new List<ReportData>();
 
                 foreach (var car in filteredCars)
                 {
@@ -171,9 +163,15 @@ namespace CarSales.Services.CarServices
 
         private async Task<List<Car>> GetAllSellingCars()
         {
-            var cachedSellingCars = JsonConvert.DeserializeObject<List<Car>>(await _cacheService.Get("SellingCars"));
+            var deserializableString = await _cacheService.Get("SellingCars");
 
-            if (cachedSellingCars == null)
+            var cachedSellingCars = new List<Car>();
+
+            if (!string.IsNullOrEmpty(deserializableString))
+                cachedSellingCars = JsonConvert.DeserializeObject<List<Car>>(deserializableString);
+
+
+            if (cachedSellingCars == null || cachedSellingCars.Count == 0)
             {
                 cachedSellingCars = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == false);
                 if (cachedSellingCars == null || cachedSellingCars.Count == 0)
