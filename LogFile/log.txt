@@ -119,68 +119,6 @@
 09/21/2021 14:36:39 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2090 ms
 09/21/2021 14:37:34 +04:00 HTTP "PUT" "/Client" responded 200 in 30649.6953 ms
 09/21/2021 14:38:07 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 200 in 15771.3678 ms
-09/21/2021 18:10:28 +04:00 Application failed to start!
-System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.) (Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.)
- ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
- ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   --- End of inner exception stack trace ---
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
-   --- End of inner exception stack trace ---
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
-   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
-   at Microsoft.Extensions.DependencyInjection.DefaultServiceProviderFactory.CreateServiceProvider(IServiceCollection containerBuilder)
-   at Microsoft.Extensions.Hosting.Internal.ServiceFactoryAdapter`1.CreateServiceProvider(Object containerBuilder)
-   at Microsoft.Extensions.Hosting.HostBuilder.CreateServiceProvider()
-   at Microsoft.Extensions.Hosting.HostBuilder.Build()
-   at CarSales.Program.Main(String[] args) in D:\testApi\src\CarSales\Program.cs:line 31
- ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
- ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   --- End of inner exception stack trace ---
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)<---
-
-09/21/2021 18:11:45 +04:00 Application failed to start!
-System.AggregateException: Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.) (Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.)
- ---> System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.ClientServices.IClientService Lifetime: Transient ImplementationType: CarSales.Services.ClientServices.ClientService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
- ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.ClientRepository' while attempting to activate 'CarSales.Services.ClientServices.ClientService'.
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   --- End of inner exception stack trace ---
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
-   --- End of inner exception stack trace ---
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)
-   at Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider(IServiceCollection services, ServiceProviderOptions options)
-   at Microsoft.Extensions.DependencyInjection.DefaultServiceProviderFactory.CreateServiceProvider(IServiceCollection containerBuilder)
-   at Microsoft.Extensions.Hosting.Internal.ServiceFactoryAdapter`1.CreateServiceProvider(Object containerBuilder)
-   at Microsoft.Extensions.Hosting.HostBuilder.CreateServiceProvider()
-   at Microsoft.Extensions.Hosting.HostBuilder.Build()
-   at CarSales.Program.Main(String[] args) in D:\testApi\src\CarSales\Program.cs:line 31
- ---> (Inner Exception #1) System.InvalidOperationException: Error while validating the service descriptor 'ServiceType: CarSales.Services.CarServices.ICarService Lifetime: Transient ImplementationType: CarSales.Services.CarServices.CarService': Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
- ---> System.InvalidOperationException: Unable to resolve service for type 'CarSales.Repository.CustomRepositories.CarRepository' while attempting to activate 'CarSales.Services.CarServices.CarService'.
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(ResultCache lifetime, Type serviceType, Type implementationType, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain, Int32 slot)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.GetCallSite(ServiceDescriptor serviceDescriptor, CallSiteChain callSiteChain)
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   --- End of inner exception stack trace ---
-   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.ValidateService(ServiceDescriptor descriptor)
-   at Microsoft.Extensions.DependencyInjection.ServiceProvider..ctor(IEnumerable`1 serviceDescriptors, IServiceProviderEngine engine, ServiceProviderOptions options)<---
-
 09/21/2021 18:14:05 +04:00 Could not find such car!
 09/21/2021 18:14:05 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 1661.5053 ms
 09/21/2021 18:14:17 +04:00 Could not find such car!
@@ -384,3 +322,56 @@ System.AggregateException: Some services are not able to be constructed (Error w
 09/23/2021 15:42:12 +04:00 HTTP "POST" "/Car/BuyCar" responded 400 in 17332.6531 ms
 09/23/2021 15:43:24 +04:00 HTTP "POST" "/Car/BuyCar" responded 200 in 43117.8331 ms
 09/23/2021 15:43:55 +04:00 HTTP "GET" "/Car" responded 200 in 14972.2198 ms
+09/24/2021 10:52:46 +04:00 It was not possible to connect to the redis server(s). UnableToConnect on RedisConnection:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 4s ago, v: 2.0.593.37019
+09/24/2021 10:52:46 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 500 in 11526.3211 ms
+09/24/2021 10:53:33 +04:00 Coud not find such client!
+09/24/2021 10:53:33 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 400 in 3404.3361 ms
+09/28/2021 11:25:21 +04:00 HTTP "GET" "/Car" responded 200 in 1890.4518 ms
+09/28/2021 11:25:28 +04:00 Unexpected character encountered while parsing value: S. Path '', line 0, position 0.
+09/28/2021 11:25:28 +04:00 HTTP "GET" "/Car" responded 500 in 98.0216 ms
+09/28/2021 11:25:34 +04:00 Unexpected character encountered while parsing value: S. Path '', line 0, position 0.
+09/28/2021 11:25:34 +04:00 HTTP "GET" "/Car" responded 500 in 14.8840 ms
+09/28/2021 11:27:59 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.4717 ms
+09/28/2021 11:28:00 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1295 ms
+09/28/2021 11:28:24 +04:00 Unexpected character encountered while parsing value: S. Path '', line 0, position 0.
+09/28/2021 11:28:24 +04:00 HTTP "GET" "/Car" responded 500 in 18217.9985 ms
+09/28/2021 11:58:43 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 4.8171 ms
+09/28/2021 11:58:43 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1374 ms
+09/28/2021 11:59:02 +04:00 HTTP "GET" "/Car" responded 200 in 13762.1486 ms
+09/28/2021 12:14:53 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 2.7220 ms
+09/28/2021 12:14:53 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 2.7285 ms
+09/28/2021 12:15:04 +04:00 HTTP "GET" "/Car" responded 200 in 3243.7479 ms
+09/28/2021 12:15:22 +04:00 Coud not find such client!
+09/28/2021 12:15:22 +04:00 HTTP "GET" "/Client?IdentityNumber=12121212121" responded 400 in 262.7471 ms
+09/28/2021 12:15:43 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 200 in 28.3297 ms
+09/28/2021 12:15:53 +04:00 Unexpected character encountered while parsing value: C. Path '', line 0, position 0.
+09/28/2021 12:15:53 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 500 in 293.1573 ms
+09/28/2021 12:17:40 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 2.5601 ms
+09/28/2021 12:17:40 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.0761 ms
+09/28/2021 12:18:07 +04:00 Unexpected character encountered while parsing value: C. Path '', line 0, position 0.
+09/28/2021 12:18:07 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 500 in 14934.6747 ms
+09/28/2021 12:19:03 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.2680 ms
+09/28/2021 12:19:03 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1082 ms
+09/28/2021 12:22:42 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.5567 ms
+09/28/2021 12:22:42 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.0983 ms
+09/28/2021 12:23:15 +04:00 Unexpected character encountered while parsing value: C. Path '', line 0, position 0.
+09/28/2021 12:23:15 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 500 in 15995.1069 ms
+09/28/2021 12:28:47 +04:00 Unexpected character encountered while parsing value: C. Path '', line 0, position 0.
+09/28/2021 12:28:47 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 500 in 2260.8059 ms
+09/28/2021 16:40:09 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.6658 ms
+09/28/2021 16:40:09 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.6660 ms
+09/28/2021 16:40:34 +04:00 Value cannot be null. (Parameter 'value')
+09/28/2021 16:40:34 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 500 in 11036.5429 ms
+09/28/2021 16:56:31 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.2491 ms
+09/28/2021 16:56:31 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1577 ms
+09/28/2021 16:57:55 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 200 in 68639.9945 ms
+09/28/2021 16:58:38 +04:00 Object reference not set to an instance of an object.
+09/28/2021 16:58:40 +04:00 HTTP "GET" "/Car" responded 500 in 31297.4180 ms
+09/28/2021 16:59:03 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 4.0092 ms
+09/28/2021 16:59:03 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2197 ms
+09/28/2021 17:01:44 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 5.2801 ms
+09/28/2021 17:01:44 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.2193 ms
+09/28/2021 17:02:39 +04:00 HTTP "GET" "/Car" responded 200 in 40832.4321 ms
+09/28/2021 17:03:44 +04:00 Could not find such car!
+09/28/2021 17:03:44 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 3753.7613 ms
+09/28/2021 17:03:53 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 179.7138 ms

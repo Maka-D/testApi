@@ -1,6 +1,5 @@
 ﻿using CarSales.Domain.Models;
 using CarSales.Repository.CustomRepositories;
-using CarSales.Repository.CacheService;
 using CarSales.Repository.RepositoryPattern;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,12 +19,8 @@ namespace CarSales.Repository
             return services
                 .AddScoped(typeof(IRepository<Client>), typeof(Repository<Client>))
                 .AddScoped(typeof(IRepository<Car>), typeof(Repository<Car>))
-                .AddSingleton(typeof(ICacheService), typeof(RedisCacheService))
                 .AddTransient(typeof(ClientRepository))
-                .AddTransient(typeof(CarRepository))
-                .AddMemoryCache()
-                .AddStackExchangeRedisCache(options =>
-                { options.Configuration = "localhost:6379"; });
+                .AddTransient(typeof(CarRepository));
         }
     }
 }

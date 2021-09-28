@@ -1,4 +1,5 @@
-﻿using CarSales.Services.CarServices;
+﻿using CarSales.Services.CacheService;
+using CarSales.Services.CarServices;
 using CarSales.Services.ClientServices;
 using CarSales.Services.DTOs;
 using CarSales.Services.FluentValidation;
@@ -29,7 +30,11 @@ namespace CarSales.Services
                 .AddAutoMapper(typeof(MapperProfile))
                 .AddScoped(typeof(IValidator<ClientInput>), typeof(ClientInputValidation))
                 .AddScoped(typeof(IValidator<CarInput>), typeof(CarInputValidation))
-                .AddScoped(typeof(IValidator<DateInput>), typeof(DateInputValidation));
+                .AddScoped(typeof(IValidator<DateInput>), typeof(DateInputValidation))
+                .AddSingleton(typeof(ICacheService), typeof(RedisCacheService))
+                .AddMemoryCache()
+                .AddStackExchangeRedisCache(options =>
+                { options.Configuration = "localhost:6379"; });
         }
     }
 }

@@ -4,7 +4,7 @@ using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
 using CarSales.Repository;
 using CarSales.Repository.CustomRepositories;
-using CarSales.Repository.CacheService;
+using CarSales.Services.CacheService;
 using CarSales.Services.DTOs;
 using CarSales.Services.ValidateInput;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace CarSales.Services.CarServices
 {
@@ -125,15 +126,12 @@ namespace CarSales.Services.CarServices
 
         public async Task<List<ReportData>> MonthlyReport()
         {
-            var deserializableString = await _cacheService.Get("MonthlyReport");
-
-            var cachedReport = new List<ReportData>();
-
-            if (!string.IsNullOrEmpty(deserializableString))
-                cachedReport = JsonConvert.DeserializeObject<List<ReportData>>(deserializableString);
+            var cachedReport = await _cacheService.Get<List<ReportData>>("MonthlyReport");
 
             if (cachedReport == null || cachedReport.Count == 0)
             {
+                cachedReport = new List<ReportData>();
+
                 var carGroups = await _carRepository.GetByCondition(x => x.DeletedAt == null && x.IsSold == true);
 
                 var filteredCars = carGroups.GroupBy(x => x.FinishedSale.Month).Select(x => new { month = x.Key, Cars = x.ToList() }).ToList();
@@ -158,7 +156,11 @@ namespace CarSales.Services.CarServices
                     cachedReport.Add(report);
                 }
 
-                await _cacheService.Set("MonthlyReport", cachedReport);
+                await _cacheService.Set("MonthlyReport", cachedReport, new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(60),
+                    SlidingExpiration = TimeSpan.FromMinutes(30)
+                });
             }
             
 
@@ -167,12 +169,7 @@ namespace CarSales.Services.CarServices
 
         private async Task<List<Car>> GetAllSellingCars()
         {
-            var deserializableString = await _cacheService.Get("SellingCars");
-
-            var cachedSellingCars = new List<Car>();
-
-            if (!string.IsNullOrEmpty(deserializableString))
-                cachedSellingCars = JsonConvert.DeserializeObject<List<Car>>(deserializableString);
+            var cachedSellingCars = await _cacheService.Get<List<Car>>("SellingCars");
 
 
             if (cachedSellingCars == null || cachedSellingCars.Count == 0)
@@ -183,7 +180,11 @@ namespace CarSales.Services.CarServices
                     throw new CarDoesNotExistsException();
                 }
 
-                await _cacheService.Set("SellingCars", cachedSellingCars);
+                await _cacheService.Set("SellingCars", cachedSellingCars, new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(60),
+                    SlidingExpiration = TimeSpan.FromMinutes(15)
+                });
             }
 
             return cachedSellingCars.ToList();
@@ -191,18 +192,26 @@ namespace CarSales.Services.CarServices
 
         private async Task CheckCarCache()
         {
-            var cachedSellingCars = await _cacheService.Get("SellingCars");
+            var cachedSellingCars = await _cacheService.Get<List<Car>>("SellingCars");
             if (cachedSellingCars != null)
             {
                 await _cacheService.Remove("SellingCars");
-                await _cacheService.Set("SellingCars", await GetAllSellingCars());
+                await _cacheService.Set("SellingCars", await GetAllSellingCars(), new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(60),
+                    SlidingExpiration = TimeSpan.FromMinutes(15)
+                });
             }
                
-            var cachedReport = await _cacheService.Get("MonthlyReport");
+            var cachedReport = await _cacheService.Get<List<ReportData>>("MonthlyReport");
             if (cachedReport != null)
             {
                 await _cacheService.Remove("MonthlyReport");
-                await _cacheService.Set("MonthlyReport", await MonthlyReport());
+                await _cacheService.Set("MonthlyReport", await MonthlyReport(), new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(60),
+                    SlidingExpiration = TimeSpan.FromMinutes(15)
+                });
             }
         }
     }

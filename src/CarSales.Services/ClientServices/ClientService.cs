@@ -3,7 +3,7 @@ using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Repository;
 using CarSales.Repository.CustomRepositories;
-using CarSales.Repository.CacheService;
+using CarSales.Services.CacheService;
 using CarSales.Repository.RepositoryPattern;
 using CarSales.Services.DTOs;
 using CarSales.Services.ValidateInput;
@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace CarSales.Services.ClientServices
 {
@@ -60,7 +61,7 @@ namespace CarSales.Services.ClientServices
                 throw new ClientDoesNotExistsException();
 
             //checks if client exists in cache and removes
-            var cachedClient = await GetCachedClient(clientToUpdate.IdentityNumber);
+            var cachedClient = await _cacheService.Get<Client>(client.IdentityNumber);
             if (cachedClient != null)
                 await _cacheService.Remove(clientToUpdate.IdentityNumber);
 
@@ -71,7 +72,11 @@ namespace CarSales.Services.ClientServices
             clientToUpdate.BirthDate = client.BirthDate;
             clientToUpdate.Email = client.Email;
 
-            await _cacheService.Set(clientToUpdate.IdentityNumber, clientToUpdate);
+            await _cacheService.Set(clientToUpdate.IdentityNumber, clientToUpdate, new DistributedCacheEntryOptions
+            {
+                AbsoluteExpiration = DateTime.Now.AddMinutes(60),
+                SlidingExpiration = TimeSpan.FromMinutes(30)
+            });
 
             return await _clientRepo.Update(clientToUpdate);
 
@@ -84,16 +89,20 @@ namespace CarSales.Services.ClientServices
                 throw new InvalidInputException();
             }
 
-            var cachedClient = await GetCachedClient(IdentityNum);
+            var cachedClient = await _cacheService.Get<Client>(IdentityNum);
 
-            if(cachedClient == null)
+            if (cachedClient == null)
             {
                 cachedClient = await _clientRepo.Get(x => x.IdentityNumber == IdentityNum && x.DeletedAt == null);
 
                 if (cachedClient == null)
                     throw new ClientDoesNotExistsException();
 
-                await _cacheService.Set(IdentityNum, cachedClient);
+                await _cacheService.Set(IdentityNum, cachedClient, new DistributedCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(60),
+                    SlidingExpiration = TimeSpan.FromMinutes(30)
+                });
             }
             return cachedClient;
             
@@ -107,22 +116,12 @@ namespace CarSales.Services.ClientServices
             }
 
             //checks if client exist in cache and removes
-            if (await GetCachedClient(IdenNum) != null)
+            if (await _cacheService.Get<Client>(IdenNum) != null)
                 await _cacheService.Remove(IdenNum);
 
             await _clientRepo.Delete(await _clientRepo.Get(x => x.IdentityNumber == IdenNum && x.DeletedAt == null));     
         }
 
-        //gets client from cache if exists and returns deserialized object
-        private async Task<Client> GetCachedClient(string IdentityNumber)
-        {
-            var deserializableString = await _cacheService.Get(IdentityNumber);
-
-            if (!string.IsNullOrEmpty(deserializableString))
-               return JsonConvert.DeserializeObject<Client>(deserializableString);
-            
-            return null;
-        }
-
+       
     }
 }
