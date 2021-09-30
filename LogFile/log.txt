@@ -375,3 +375,8 @@
 09/28/2021 17:03:44 +04:00 Could not find such car!
 09/28/2021 17:03:44 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 400 in 3753.7613 ms
 09/28/2021 17:03:53 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 179.7138 ms
+09/29/2021 18:25:10 +04:00 HTTP "GET" "/" responded 404 in 1.6405 ms
+09/29/2021 18:25:18 +04:00 HTTP "GET" "/" responded 404 in 0.1866 ms
+09/30/2021 12:52:58 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 1.9014 ms
+09/30/2021 12:52:58 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.0594 ms
+09/30/2021 12:55:56 +04:00 HTTP "POST" "/Client" responded 200 in 107310.5611 ms

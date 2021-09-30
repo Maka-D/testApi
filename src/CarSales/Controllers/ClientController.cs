@@ -3,6 +3,7 @@ using CarSales.Domain.Models;
 using CarSales.Repository.ErrorHandlerMiddleware;
 using CarSales.Services.ClientServices;
 using CarSales.Services.DTOs;
+using CarSales.TokenService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -19,10 +20,12 @@ namespace CarSales.Controllers
     {
         
         private readonly IClientService _clientService;
+        private readonly ITokenService _token;
 
-        public ClientController(IClientService clientService)
+        public ClientController(IClientService clientService, ITokenService token)
         {
             _clientService = clientService;
+            _token = token;
         }
 
         [HttpGet]
@@ -38,6 +41,8 @@ namespace CarSales.Controllers
         public async Task<IActionResult> RegisterClient(ClientInput client)
         {
             var createdClient = await _clientService.AddClient(client);
+            if(!_token.IsValidToken(client))
+                await _token.GenerateJwtToken(client);
             return Ok(createdClient);
         }
 
