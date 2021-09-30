@@ -4,6 +4,7 @@ using CarSales.Repository.ErrorHandlerMiddleware;
 using CarSales.Services.ClientServices;
 using CarSales.Services.DTOs;
 using CarSales.TokenService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
@@ -16,6 +17,7 @@ namespace CarSales.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ClientController : ControllerBase
     {
         
@@ -31,19 +33,19 @@ namespace CarSales.Controllers
         [HttpGet]
         public async Task<IActionResult> GetClient(string IdentityNumber)
         {
-
             var client = await _clientService.FindClient(IdentityNumber);
             return Ok(client);
 
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterClient(ClientInput client)
         {
             var createdClient = await _clientService.AddClient(client);
-            if(!_token.IsValidToken(client))
-                await _token.GenerateJwtToken(client);
-            return Ok(createdClient);
+            //if(!_token.IsValidToken(client))
+             var token =   await _token.GenerateJwtToken(client);
+            return Ok(new { createdClient , token});
         }
 
         [HttpPut]

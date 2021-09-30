@@ -4,6 +4,7 @@ using CarSales.Repository.ErrorHandlerMiddleware;
 using CarSales.Services;
 using CarSales.TokenService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,6 +38,22 @@ namespace CarSales
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddAuthentication(x => {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidIssuer = Configuration["JWT:Issuer"],
+                        ValidAudience = Configuration["JWT:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"])),
+                        RequireExpirationTime = true,
+                        ValidateLifetime = true
+                    };
+                });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -46,21 +63,18 @@ namespace CarSales
             services.AddDbContext<AppDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("carConn")));
 
-            services.AddTransient<ITokenService, JwtTokenService>();
+            services.AddTransient<ITokenService, JwtTokenService>();            
 
-            services.AddAuthentication(x => {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-                .AddJwtBearer( options =>
+            services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidIssuer = Configuration["JWT:Issuer"],
-                        ValidAudience = Configuration["JWT:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Key"]))
-                    };
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
                 });
+            });
 
             services.AddRepository();
 
@@ -83,8 +97,6 @@ namespace CarSales
             app.UseRouting();
 
             app.UseAuthentication();
-
-            app.UseAuthorization();
 
             app.UseSerilogRequestLogging();
 

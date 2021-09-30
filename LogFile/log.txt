@@ -380,3 +380,21 @@
 09/30/2021 12:52:58 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 1.9014 ms
 09/30/2021 12:52:58 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.0594 ms
 09/30/2021 12:55:56 +04:00 HTTP "POST" "/Client" responded 200 in 107310.5611 ms
+09/30/2021 15:05:08 +04:00 Such client already exists!
+09/30/2021 15:05:08 +04:00 HTTP "POST" "/Client" responded 400 in 3118.2096 ms
+09/30/2021 15:05:16 +04:00 Object reference not set to an instance of an object.
+09/30/2021 15:05:16 +04:00 HTTP "POST" "/Client" responded 500 in 503.7415 ms
+09/30/2021 15:05:48 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 2.5931 ms
+09/30/2021 15:05:48 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.0513 ms
+09/30/2021 15:09:36 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 1.8255 ms
+09/30/2021 15:09:37 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.0428 ms
+09/30/2021 15:10:08 +04:00 Such client already exists!
+09/30/2021 15:10:09 +04:00 HTTP "POST" "/Client" responded 400 in 13172.7734 ms
+09/30/2021 15:11:07 +04:00 HTTP "POST" "/Client" responded 200 in 26859.4797 ms
+09/30/2021 15:32:54 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 2.8229 ms
+09/30/2021 15:32:54 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.0918 ms
+09/30/2021 15:34:14 +04:00 Such client already exists!
+09/30/2021 15:34:16 +04:00 HTTP "POST" "/Client" responded 400 in 14925.7788 ms
+09/30/2021 15:35:29 +04:00 HTTP "POST" "/Client" responded 200 in 25977.5886 ms
+09/30/2021 16:37:39 +04:00 HTTP "POST" "/Client" responded 200 in 2741.3208 ms
+09/30/2021 17:11:40 +04:00 HTTP "POST" "/Client" responded 200 in 3534.4448 ms

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace CarSales.TokenService
 {
-    public class JwtTokenService : ITokenService
+    public class JwtTokenService  :ITokenService
     {
-        private readonly IConfiguration _config;
+        private static IConfiguration _config;
 
         public JwtTokenService(IConfiguration config)
         {
@@ -27,9 +27,7 @@ namespace CarSales.TokenService
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.GivenName, client.FirstName),
-                new Claim(JwtRegisteredClaimNames.Jti, client.IdentityNumber),
-                new Claim("Phone_Number", client.PhoneNumber)
+                new Claim(JwtRegisteredClaimNames.Jti, client.IdentityNumber)
             };
 
             var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT: Audience"],
@@ -42,7 +40,8 @@ namespace CarSales.TokenService
 
         //public bool IsValidToken(ClientInput client)
         //{
-           
+        //    throw new NotImplementedException();
         //}
+
     }
 }
