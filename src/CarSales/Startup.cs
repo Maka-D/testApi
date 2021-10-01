@@ -63,7 +63,7 @@ namespace CarSales
             services.AddDbContext<AppDbContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("carConn")));
 
-            services.AddTransient<ITokenService, JwtTokenService>();            
+            services.AddTransient<ITokenService, JwtTokenService>();
 
             services.AddSwaggerGen(c =>
             {
@@ -73,6 +73,19 @@ namespace CarSales
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                   {
+                      new OpenApiSecurityScheme
+                      {
+                         Reference = new OpenApiReference
+                         {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                         }
+                      },
+                      new string[] { }
+                   }
                 });
             });
 
