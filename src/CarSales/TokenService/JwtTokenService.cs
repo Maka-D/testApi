@@ -22,26 +22,24 @@ namespace CarSales.TokenService
 
         public Task<string> GenerateJwtToken(ClientInput client)
         {
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
             var credintials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            
 
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Jti, client.IdentityNumber)
             };
 
-            var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT: Audience"],
+            var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Audience"],
                 claims, 
                 expires: DateTime.Now.AddHours(3),
                 signingCredentials: credintials);
 
+
             return  Task.FromResult(new JwtSecurityTokenHandler().WriteToken(token));
         }
-
-        //public bool IsValidToken(ClientInput client)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
     }
 }

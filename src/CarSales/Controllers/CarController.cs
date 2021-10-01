@@ -3,6 +3,7 @@ using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
 using CarSales.Services.CarServices;
 using CarSales.Services.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,6 +25,7 @@ namespace CarSales.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> RegisterCar(string IdentityNumber, CarInput car)
         {
             await _carService.AddCar(IdentityNumber, car);
@@ -32,6 +34,7 @@ namespace CarSales.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> DeleteCar(IdentifyingData data)
         {
 
@@ -41,6 +44,7 @@ namespace CarSales.Controllers
         }
 
         [HttpPost("BuyCar")]
+        [Authorize]
         public async Task<IActionResult> BuyCar(IdentifyingData data)
         {
             await _carService.BuyCar(data);

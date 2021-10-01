@@ -9,6 +9,5 @@ namespace CarSales.TokenService
     public interface ITokenService
     {
         Task<string> GenerateJwtToken(ClientInput client);
-        //bool IsValidToken(ClientInput client);
     }
 }

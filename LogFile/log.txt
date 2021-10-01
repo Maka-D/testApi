@@ -414,3 +414,31 @@
 10/01/2021 12:24:00 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 1.1209 ms
 10/01/2021 12:24:04 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 2.3289 ms
 10/01/2021 12:26:04 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 18.7769 ms
+10/01/2021 12:38:44 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 10.2808 ms
+10/01/2021 12:40:45 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 53.0062 ms
+10/01/2021 12:40:45 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 53.0125 ms
+10/01/2021 12:41:18 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 10.3843 ms
+10/01/2021 12:41:50 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 45.2394 ms
+10/01/2021 12:41:51 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1107 ms
+10/01/2021 12:42:20 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 12.6758 ms
+10/01/2021 12:44:39 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 11.6374 ms
+10/01/2021 12:48:23 +04:00 HTTP "GET" "/swagger/swagger-ui-bundle.js.map" responded 404 in 3.3130 ms
+10/01/2021 12:48:23 +04:00 HTTP "GET" "/swagger/swagger-ui-standalone-preset.js.map" responded 404 in 0.1575 ms
+10/01/2021 12:51:34 +04:00 HTTP "POST" "/Client" responded 200 in 166985.1477 ms
+10/01/2021 12:52:12 +04:00 Could not load file or assembly 'Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'. The system cannot find the file specified.
+10/01/2021 12:52:12 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 500 in 188.2293 ms
+10/01/2021 12:56:22 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 12.2586 ms
+10/01/2021 13:57:02 +04:00 HTTP "POST" "/Client" responded 200 in 3067.5809 ms
+10/01/2021 13:57:32 +04:00 Could not load file or assembly 'Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'. The system cannot find the file specified.
+10/01/2021 13:57:32 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 500 in 71.9140 ms
+10/01/2021 14:02:55 +04:00 The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+10/01/2021 14:02:55 +04:00 HTTP "POST" "/Client" responded 500 in 3153.6308 ms
+10/01/2021 14:35:32 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 12.9283 ms
+10/01/2021 14:36:16 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 401 in 8.8840 ms
+10/01/2021 14:36:44 +04:00 Could not load file or assembly 'Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'. The system cannot find the file specified.
+10/01/2021 14:36:44 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 500 in 1718.0482 ms
+10/01/2021 14:39:12 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 200 in 3098.0769 ms
+10/01/2021 14:39:40 +04:00 HTTP "DELETE" "/Client?IdentityNumber=15975315975" responded 200 in 739.7267 ms
+10/01/2021 14:40:17 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 336.7944 ms
+10/01/2021 14:40:34 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 24.8790 ms
+10/01/2021 14:40:41 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 9.4048 ms
