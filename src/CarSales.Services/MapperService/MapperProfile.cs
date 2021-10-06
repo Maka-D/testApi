@@ -13,7 +13,7 @@ namespace CarSales.Services.MapperService
     {
         public MapperProfile()
         {
-            CreateMap<ClientInput, Client>();
+            CreateMap<UserInput, Client>();
 
             CreateMap<CarInput, Car>();           
 

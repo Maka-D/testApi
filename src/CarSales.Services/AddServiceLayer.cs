@@ -5,15 +5,11 @@ using CarSales.Services.DTOs;
 using CarSales.Services.FluentValidation;
 using CarSales.Services.FluentValidator;
 using CarSales.Services.MapperService;
+using CarSales.Services.UserServices;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarSales.Services
 {
@@ -25,10 +21,10 @@ namespace CarSales.Services
                 .AddFluentValidation(fv =>
                   fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly())
                 )
-                .AddTransient(typeof(IClientService), typeof(ClientService))
+                .AddTransient(typeof(IUserService), typeof(UserService))
                 .AddTransient(typeof(ICarService), typeof(CarService))
                 .AddAutoMapper(typeof(MapperProfile))
-                .AddScoped(typeof(IValidator<ClientInput>), typeof(ClientInputValidation))
+                .AddScoped(typeof(IValidator<UserInput>), typeof(UserInputValidation))
                 .AddScoped(typeof(IValidator<CarInput>), typeof(CarInputValidation))
                 .AddScoped(typeof(IValidator<DateInput>), typeof(DateInputValidation))
                 .AddSingleton(typeof(ICacheService), typeof(RedisCacheService))

@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
 using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
-using CarSales.Repository;
 using CarSales.Repository.CustomRepositories;
 using CarSales.Services.CacheService;
-using CarSales.Repository.RepositoryPattern;
 using CarSales.Services.DTOs;
 using CarSales.Services.ValidateInput;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +12,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Caching.Distributed;
+using CarSales.Services.ClientServices;
 
-namespace CarSales.Services.ClientServices
+namespace CarSales.Services.UserServices
 {
-    public class ClientService : IClientService
+    public class UserService : IUserService
     {
         private readonly ClientRepository _clientRepo;
         private readonly IMapper _mapper;
         private readonly ICacheService _cacheService;
 
-        public ClientService(IMapper mapper, ClientRepository clientRepo, ICacheService cacheService)
+        public UserService(IMapper mapper, ClientRepository clientRepo, ICacheService cacheService)
         {
             _clientRepo = clientRepo;
             _mapper = mapper;
             _cacheService = cacheService;
         }
-        public async Task<Client> AddClient(ClientInput client)
+        public async Task<Client> AddClient(UserInput client)
         {
             if (client == null)
             {
@@ -48,7 +46,7 @@ namespace CarSales.Services.ClientServices
             return await _clientRepo.Insert(insertedClient);
         }
 
-        public async Task<Client> UpdateClient(ClientInput client)
+        public async Task<Client> UpdateClient(UserInput client)
         {
             if (client == null)
             {

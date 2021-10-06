@@ -9,6 +9,7 @@ namespace CarSales.Domain.Models
 {
     public class Client :BaseEntity
     {
+        public int UserId { get; set; }
         [Required]
         [RegularExpression("^[0 - 9] +$")]
         public string IdentityNumber { get; set; }
@@ -24,6 +25,6 @@ namespace CarSales.Domain.Models
         public string Email { get; set; }
         public string Address { get; set; }
 
-
+        public string Password { get; set; }
     }
 }

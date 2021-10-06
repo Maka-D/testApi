@@ -21,13 +21,11 @@ namespace CarSales.Controllers
     public class ClientController : ControllerBase
     {
         
-        private readonly IClientService _clientService;
-        private readonly ITokenService _token;
+        private readonly IUserService _clientService;
 
-        public ClientController(IClientService clientService, ITokenService token)
+        public ClientController(IUserService clientService)
         {
             _clientService = clientService;
-            _token = token;
         }
 
         [HttpGet]
@@ -38,18 +36,16 @@ namespace CarSales.Controllers
 
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> RegisterClient(ClientInput client)
-        {
-            var createdClient = await _clientService.AddClient(client);
-            //if(!_token.IsValidToken(client))
-             var token =   await _token.GenerateJwtToken(client);
-            return Ok(new { createdClient , token});
-        }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> RegisterClient(ClientInput client)
+        //{
+        //    var createdClient = await _clientService.AddClient(client);
+        //    return Ok(createdClient);
+        //}
 
         [HttpPut]
-        public async Task<ActionResult> EditClient(ClientInput client)
+        public async Task<ActionResult> EditClient(UserInput client)
         {
             await _clientService.UpdateClient(client);
             return Ok();

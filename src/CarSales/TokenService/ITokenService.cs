@@ -8,6 +8,6 @@ namespace CarSales.TokenService
 {
     public interface ITokenService
     {
-        Task<string> GenerateJwtToken(ClientInput client);
+        Task<string> GenerateJwtToken(LogInInput input);
     }
 }

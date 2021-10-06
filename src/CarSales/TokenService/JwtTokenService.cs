@@ -20,7 +20,7 @@ namespace CarSales.TokenService
             _config = config;
         }
 
-        public Task<string> GenerateJwtToken(ClientInput client)
+        public Task<string> GenerateJwtToken(LogInInput input)
         {
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
@@ -29,7 +29,8 @@ namespace CarSales.TokenService
 
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Jti, client.IdentityNumber)
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Sub, input.IdentityNumber)
             };
 
             var token = new JwtSecurityToken(_config["JWT:Issuer"], _config["JWT:Audience"],

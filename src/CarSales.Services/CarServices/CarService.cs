@@ -2,12 +2,10 @@
 using CarSales.Domain.CustomExceptions;
 using CarSales.Domain.Models;
 using CarSales.Domain.Models.ReportModel;
-using CarSales.Repository;
 using CarSales.Repository.CustomRepositories;
 using CarSales.Services.CacheService;
 using CarSales.Services.DTOs;
 using CarSales.Services.ValidateInput;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;

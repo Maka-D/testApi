@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace CarSales.Services.FluentValidator
 {
-    public class ClientInputValidation : AbstractValidator<ClientInput>
+    public class UserInputValidation : AbstractValidator<UserInput>
     {
-        public ClientInputValidation()
+        public UserInputValidation()
         {
             RuleFor(x => x.IdentityNumber)
                 .NotEmpty()
@@ -31,10 +31,20 @@ namespace CarSales.Services.FluentValidator
 
             RuleFor(x => x.PhoneNumber)
                 .NotEmpty()
-                .WithMessage("Phone Number Is Required!");
-                
-                
-                
+                .WithMessage("Phone Number Is Required!")
+                .MaximumLength(15);
+
+            RuleFor(x => x.Password)
+                .NotEmpty()
+                .MaximumLength(20)
+                .Equal(x => x.RepeatPassword);
+
+            RuleFor(x => x.RepeatPassword)
+                .NotEmpty()
+                .MaximumLength(20)
+                .Equal(x => x.Password);
+
+
         }
     }
 }

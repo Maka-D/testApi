@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarSales.Services.DTOs
 {
-    public class ClientInput
+    public class UserInput
     {
         [Required]
         public string IdentityNumber { get; set; }
@@ -23,5 +23,9 @@ namespace CarSales.Services.DTOs
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Address { get; set; }
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        [DataType(DataType.Password)]
+        public string RepeatPassword { get; set; }
     }
 }

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace CarSales.Services.ClientServices
 {
-    public interface IClientService
+    public interface IUserService
     {
-        Task<Client> AddClient(ClientInput client);
-        Task<Client> UpdateClient(ClientInput client);
+        Task<Client> AddClient(UserInput client);
+        Task<Client> UpdateClient(UserInput client);
         Task<Client> FindClient(string IdentityNum);
         Task DeleteClient(string IdenNum);
 

@@ -50,6 +50,10 @@ namespace CarSales.Repository.EntityMapper
             builder.Property(x => x.DeletedAt)
                 .HasColumnType("DateTime");
 
+            builder.Property(x => x.Password)
+                .IsRequired()
+                .HasColumnType("NVARCHAR(20)");
+
         }
     }
 }
