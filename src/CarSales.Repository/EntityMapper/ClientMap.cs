@@ -13,14 +13,11 @@ namespace CarSales.Repository.EntityMapper
     {
         public void Configure(EntityTypeBuilder<Client> builder)
         {
-            builder.HasKey(x => x.Id)
-                .HasName("pk_ClientId");
-
-            builder.Property(x => x.Id).ValueGeneratedOnAdd()
-                .HasColumnType("Int");
+            builder.Property(x => x.UserId)
+                .IsRequired();
 
             builder.Property(x => x.IdentityNumber)
-                .HasColumnType("NVARCHAR(11)")              
+                .HasColumnType("VARCHAR(11)")             
                 .IsRequired();
 
             builder.Property(x => x.FirstName)
@@ -41,18 +38,6 @@ namespace CarSales.Repository.EntityMapper
             builder.Property(x => x.Address)
                 .HasColumnType("NVARCHAR(50)");
 
-            builder.Property(x => x.CreationDate)
-                .HasColumnType("DateTime");
-
-            builder.Property(x => x.ModifiedDate)
-                .HasColumnType("DateTime");
-
-            builder.Property(x => x.DeletedAt)
-                .HasColumnType("DateTime");
-
-            builder.Property(x => x.Password)
-                .IsRequired()
-                .HasColumnType("NVARCHAR(20)");
 
         }
     }

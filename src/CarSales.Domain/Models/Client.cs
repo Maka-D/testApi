@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CarSales.Domain.Models
 {
-    public class Client :BaseEntity
+    public class Client : BaseEntity
     {
-        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public string UserId { get; set; }
         [Required]
         [RegularExpression("^[0 - 9] +$")]
         public string IdentityNumber { get; set; }
@@ -25,6 +27,6 @@ namespace CarSales.Domain.Models
         public string Email { get; set; }
         public string Address { get; set; }
 
-        public string Password { get; set; }
+
     }
 }

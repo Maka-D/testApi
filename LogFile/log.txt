@@ -442,3 +442,219 @@
 10/01/2021 14:40:17 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 336.7944 ms
 10/01/2021 14:40:34 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 24.8790 ms
 10/01/2021 14:40:41 +04:00 HTTP "POST" "/Car/SellingCarsList" responded 200 in 9.4048 ms
+10/07/2021 11:43:12 +04:00 HTTP "GET" "/Client" responded 302 in 9.9699 ms
+10/07/2021 11:43:12 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.1496 ms
+10/07/2021 11:43:27 +04:00 HTTP "GET" "/Client?IdentityNumber=11111111111" responded 302 in 0.5679 ms
+10/07/2021 11:43:27 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D11111111111" responded 404 in 0.0220 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Client?IdentityNumber=11111111111" responded 302 in 0.7288 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Client?IdentityNumber=11111111111" responded 302 in 0.1127 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D11111111111" responded 404 in 0.0161 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D11111111111" responded 404 in 0.0176 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Client?IdentityNumber=11111111111" responded 302 in 0.2168 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Client?IdentityNumber=11111111111" responded 302 in 0.0834 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D11111111111" responded 404 in 0.0150 ms
+10/07/2021 11:43:32 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D11111111111" responded 404 in 0.0151 ms
+10/07/2021 12:44:50 +04:00 HTTP "DELETE" "/Car" responded 302 in 23.0368 ms
+10/07/2021 12:44:50 +04:00 HTTP "DELETE" "/Account/Login?ReturnUrl=%2FCar" responded 404 in 0.2153 ms
+10/07/2021 12:45:15 +04:00 HTTP "GET" "/Client" responded 302 in 0.8460 ms
+10/07/2021 12:45:15 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.0340 ms
+10/07/2021 12:45:19 +04:00 HTTP "GET" "/Client" responded 302 in 1.4185 ms
+10/07/2021 12:45:19 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.0152 ms
+10/07/2021 12:45:31 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975s" responded 302 in 0.6930 ms
+10/07/2021 12:45:31 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D15975315975s" responded 404 in 0.0220 ms
+10/07/2021 12:45:32 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975s" responded 302 in 0.2212 ms
+10/07/2021 12:45:32 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D15975315975s" responded 404 in 0.0159 ms
+10/07/2021 12:45:36 +04:00 HTTP "GET" "/Client?IdentityNumber=15975315975" responded 302 in 0.1513 ms
+10/07/2021 12:45:36 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D15975315975" responded 404 in 0.0171 ms
+10/07/2021 15:25:35 +04:00 HTTP "GET" "/Client" responded 302 in 23.4057 ms
+10/07/2021 15:25:35 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.1918 ms
+10/07/2021 15:26:33 +04:00 HTTP "GET" "/Client" responded 302 in 28.1593 ms
+10/07/2021 15:26:33 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.3430 ms
+10/07/2021 15:34:46 +04:00 HTTP "DELETE" "/Client" responded 302 in 28.7928 ms
+10/07/2021 15:34:46 +04:00 HTTP "DELETE" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.2853 ms
+10/07/2021 15:35:40 +04:00 HTTP "GET" "/Client" responded 302 in 6.2483 ms
+10/07/2021 15:35:40 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.0775 ms
+10/07/2021 15:58:05 +04:00 Unable to resolve service for type 'CarSales.Services.ClientServices.IUserService' while attempting to activate 'CarSales.Controllers.ClientController'.
+10/07/2021 15:58:05 +04:00 HTTP "GET" "/Client" responded 500 in 274.6197 ms
+10/07/2021 16:00:40 +04:00 Invalid Input!
+10/07/2021 16:00:42 +04:00 HTTP "GET" "/Client" responded 400 in 17986.5265 ms
+10/07/2021 16:01:28 +04:00 HTTP "GET" "/Client" responded 302 in 27.2511 ms
+10/07/2021 16:01:28 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient" responded 404 in 0.3283 ms
+10/07/2021 16:03:47 +04:00 It was not possible to connect to the redis server(s). UnableToConnect on localhost:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 7s ago, v: 2.0.593.37019
+10/07/2021 16:03:48 +04:00 HTTP "GET" "/Client?IdentityNumber=15975369845" responded 500 in 17063.7576 ms
+10/07/2021 16:32:18 +04:00 Invalid Input!
+10/07/2021 16:32:18 +04:00 HTTP "GET" "/Client" responded 400 in 273.7316 ms
+10/07/2021 16:33:11 +04:00 Invalid Input!
+10/07/2021 16:33:15 +04:00 HTTP "GET" "/Client?IdentityNumber=123456nb" responded 400 in 13233.8493 ms
+10/07/2021 16:33:42 +04:00 Coud not find such client!
+10/07/2021 16:33:42 +04:00 HTTP "GET" "/Client?IdentityNumber=12312313312" responded 400 in 16181.2980 ms
+10/08/2021 12:00:06 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:00:17 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:14:33 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:14:38 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:15:49 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:18:39 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:20:27 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:21:55 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:22:12 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:23:18 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.RegisterUser (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/08/2021 12:23:18 +04:00 HTTP "GET" "/favicon.ico" responded 404 in 1.4311 ms
+10/08/2021 12:24:24 +04:00 HTTP "POST" "/Account/AddUser" responded 400 in 345.1552 ms
+10/08/2021 12:25:07 +04:00 HTTP "POST" "/Account/AddUser" responded 400 in 14.7092 ms
+10/08/2021 12:26:18 +04:00 User password validation failed: "PasswordRequiresNonAlphanumeric;PasswordRequiresUpper".
+10/08/2021 12:26:18 +04:00 HTTP "POST" "/Account/AddUser" responded 200 in 1341.5755 ms
+10/08/2021 12:26:36 +04:00 HTTP "POST" "/Account/LogInUser" responded 400 in 12.8047 ms
+10/08/2021 12:27:39 +04:00 HTTP "POST" "/Account/LogInUser" responded 400 in 299.7078 ms
+10/08/2021 12:27:53 +04:00 Object reference not set to an instance of an object.
+10/08/2021 12:27:53 +04:00 HTTP "POST" "/Account/LogInUser" responded 500 in 1320.3557 ms
+10/08/2021 13:55:19 +04:00 User password validation failed: "PasswordRequiresNonAlphanumeric;PasswordRequiresUpper".
+10/08/2021 13:55:33 +04:00 HTTP "POST" "/Account/AddUser" responded 200 in 98044.0177 ms
+10/08/2021 15:02:08 +04:00 HTTP "POST" "/Account/AddUser" responded 400 in 797.7338 ms
+10/08/2021 15:03:06 +04:00 User password validation failed: "PasswordRequiresNonAlphanumeric;PasswordRequiresLower;PasswordRequiresUpper".
+10/08/2021 15:03:30 +04:00 HTTP "POST" "/Account/AddUser" responded 200 in 52979.6499 ms
+10/08/2021 15:19:53 +04:00 Value cannot be null. (Parameter 'user')
+10/08/2021 15:19:53 +04:00 HTTP "POST" "/Account/AddUser" responded 500 in 18608.1245 ms
+10/08/2021 15:20:59 +04:00 Value cannot be null. (Parameter 'user')
+10/08/2021 15:20:59 +04:00 HTTP "POST" "/Account/AddUser" responded 500 in 16437.6700 ms
+10/11/2021 12:32:23 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.Registration (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/11/2021 12:32:34 +04:00 An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "POST Account" for actions - CarSales.Controllers.AccountController.Registration (CarSales),CarSales.Controllers.AccountController.LogIn (CarSales). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwagger(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+10/11/2021 12:32:34 +04:00 HTTP "GET" "/favicon.ico" responded 404 in 4.4648 ms
+10/11/2021 12:33:35 +04:00 User password validation failed: "PasswordRequiresNonAlphanumeric;PasswordRequiresDigit;PasswordRequiresUpper".
+10/11/2021 12:33:35 +04:00 HTTP "POST" "/Account/Registration" responded 400 in 1987.6876 ms
+10/11/2021 12:40:29 +04:00 User password validation failed: "PasswordRequiresNonAlphanumeric;PasswordRequiresDigit;PasswordRequiresUpper".
+10/11/2021 12:40:29 +04:00 HTTP "POST" "/Account/Register" responded 400 in 960.3835 ms
+10/11/2021 12:41:31 +04:00 User password validation failed: "PasswordRequiresNonAlphanumeric;PasswordRequiresDigit;PasswordRequiresUpper".
+10/11/2021 12:41:31 +04:00 HTTP "POST" "/Account/Registration" responded 400 in 955.6392 ms
+10/11/2021 12:43:30 +04:00 User password validation failed: "PasswordRequiresNonAlphanumeric;PasswordRequiresDigit;PasswordRequiresUpper".
+10/11/2021 14:35:45 +04:00 User password validation failed: "PasswordRequiresDigit".
+10/11/2021 14:35:45 +04:00 HTTP "POST" "/Account/Registration" responded 400 in 1897.0681 ms
+10/11/2021 14:36:54 +04:00 A possible object cycle was detected. This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles.
+10/11/2021 14:36:54 +04:00 HTTP "POST" "/Account/Registration" responded 500 in 3704.7307 ms
+10/11/2021 14:47:55 +04:00 One or more errors occurred. (It was not possible to connect to the redis server(s). UnableToConnect on localhost:6379/Interactive, Initializing/NotStarted, last: NONE, origin: BeginConnectAsync, outstanding: 0, last-read: 2s ago, last-write: 2s ago, keep-alive: 60s, state: Connecting, mgr: 10 of 10 available, last-heartbeat: never, global: 2s ago, v: 2.0.593.37019)
+10/11/2021 14:48:03 +04:00 HTTP "POST" "/Account" responded 500 in 181918.7549 ms
+10/11/2021 15:01:27 +04:00 HTTP "GET" "/Client?IdentityNumber=55544455544" responded 200 in 3534.2932 ms
+10/11/2021 15:11:10 +04:00 HTTP "GET" "/Client?IdentityNumber=55544455544" responded 302 in 11.2884 ms
+10/11/2021 15:11:10 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D55544455544" responded 404 in 0.1582 ms
+10/11/2021 15:13:12 +04:00 User password validation failed: "PasswordRequiresDigit;PasswordRequiresUpper".
+10/11/2021 15:13:23 +04:00 HTTP "POST" "/Account/Registration" responded 400 in 21142.2988 ms
+10/11/2021 15:22:16 +04:00 HTTP "POST" "/Account/Registration" responded 400 in 2364.9805 ms
+10/11/2021 15:23:25 +04:00 HTTP "POST" "/Account/Registration" responded 200 in 33979.5821 ms
+10/11/2021 15:25:18 +04:00 HTTP "POST" "/Account" responded 200 in 46587.9869 ms
+10/11/2021 15:26:40 +04:00 HTTP "GET" "/Client?IdentityNumber=55544455544" responded 302 in 24.7632 ms
+10/11/2021 15:26:40 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D55544455544" responded 404 in 0.1160 ms
+10/11/2021 15:26:53 +04:00 HTTP "GET" "/Client?IdentityNumber=14141414141" responded 302 in 1.7468 ms
+10/11/2021 15:26:53 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D14141414141" responded 404 in 0.0201 ms
+10/11/2021 15:28:44 +04:00 HTTP "GET" "/Client?IdentityNumber=14141414141" responded 302 in 9.3843 ms
+10/11/2021 15:28:44 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D14141414141" responded 404 in 0.1564 ms
+10/11/2021 15:41:27 +04:00 HTTP "GET" "/Client?IdentityNumber=14141414141" responded 302 in 1.5300 ms
+10/11/2021 15:41:27 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D14141414141" responded 404 in 0.0532 ms
+10/11/2021 15:43:17 +04:00 HTTP "GET" "/Client?IdentityNumber=14141414141" responded 200 in 2284.6972 ms
+10/11/2021 18:13:01 +04:00 HTTP "POST" "/Account" responded 200 in 2164.7683 ms
+10/11/2021 18:13:30 +04:00 HTTP "GET" "/Client?IdentityNumber=14141414141" responded 302 in 9.3879 ms
+10/11/2021 18:13:30 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D14141414141" responded 404 in 0.0729 ms
+10/11/2021 18:13:42 +04:00 HTTP "GET" "/Client?IdentityNumber=14141414141" responded 302 in 0.6109 ms
+10/11/2021 18:13:42 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D14141414141" responded 404 in 0.0225 ms
+10/11/2021 18:13:45 +04:00 HTTP "GET" "/Client?IdentityNumber=14141414141" responded 302 in 0.6333 ms
+10/11/2021 18:13:45 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D14141414141" responded 404 in 0.0116 ms
+10/12/2021 10:38:11 +04:00 HTTP "POST" "/Account/Registration" responded 200 in 3626.6787 ms
+10/12/2021 10:38:29 +04:00 HTTP "POST" "/Account" responded 200 in 712.7963 ms
+10/12/2021 10:38:56 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 302 in 16.1633 ms
+10/12/2021 10:38:56 +04:00 HTTP "GET" "/Account/Login?ReturnUrl=%2FClient%3FIdentityNumber%3D12312312312" responded 404 in 0.0746 ms
+10/12/2021 10:45:08 +04:00 HTTP "POST" "/Account" responded 200 in 3661.6855 ms
+10/12/2021 10:45:35 +04:00 HTTP "GET" "/Client?IdentityNumber=12312312312" responded 200 in 349.4416 ms
+10/12/2021 10:48:28 +04:00 HTTP "GET" "/favicon.ico" responded 404 in 0.3998 ms
+10/12/2021 16:15:31 +04:00 Unable to resolve service for type 'CarSales.Services.UserService.IUserService' while attempting to activate 'CarSales.Controllers.AccountController'.
+10/12/2021 16:15:31 +04:00 HTTP "POST" "/Account/Registration" responded 500 in 1811.5046 ms
+10/12/2021 16:32:54 +04:00 HTTP "POST" "/Account/Registration" responded 200 in 3430.4706 ms
+10/12/2021 16:33:22 +04:00 HTTP "POST" "/Account" responded 200 in 887.4651 ms
+10/12/2021 16:33:57 +04:00 Object reference not set to an instance of an object.
+10/12/2021 16:33:57 +04:00 HTTP "POST" "/Account/Refresh?refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzY2MzQwMDIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyJ9.Uj5DD4GWGdYufZaCii6CuMot70Bt7SGgBNZPpQLjJnE" responded 500 in 176.5091 ms
+10/12/2021 16:41:32 +04:00 Entity type 'IdentityUserToken<string>' is defined with a 3-part composite key, but 1 values were passed to the 'DbSet.Find' method.
+10/12/2021 16:41:34 +04:00 HTTP "POST" "/Account/Refresh?refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzY2MzQwMDIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyJ9.Uj5DD4GWGdYufZaCii6CuMot70Bt7SGgBNZPpQLjJnE" responded 500 in 40063.2667 ms
+10/12/2021 17:40:37 +04:00 HTTP "POST" "/Account/Refresh?refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzY2MzQwMDIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyJ9.Uj5DD4GWGdYufZaCii6CuMot70Bt7SGgBNZPpQLjJnE" responded 200 in 52829.9257 ms
+10/12/2021 17:46:10 +04:00 HTTP "POST" "/Account/Refresh?refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzY2MzQwMDIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyJ9.Uj5DD4GWGdYufZaCii6CuMot70Bt7SGgBNZPpQLjJnE" responded 200 in 2059.1907 ms
+10/12/2021 18:29:55 +04:00 HTTP "DELETE" "/Account/LogOut" responded 302 in 15.3821 ms
+10/12/2021 18:29:56 +04:00 HTTP "DELETE" "/Account/Login?ReturnUrl=%2FAccount%2FLogOut" responded 404 in 0.1232 ms
+10/12/2021 18:30:45 +04:00 HTTP "POST" "/Account" responded 400 in 873.8403 ms
+10/12/2021 18:30:58 +04:00 HTTP "POST" "/Account" responded 200 in 1165.2791 ms
+10/12/2021 18:31:41 +04:00 HTTP "POST" "/Account/Refresh?refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzY2NDEwNTgsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjQ0Mzk1LyJ9.0_hdPgTNdYrLo1wefYbLTzhwmPXJ84hESF4UGPlCYtM" responded 200 in 144.9660 ms
+10/12/2021 18:32:17 +04:00 HTTP "DELETE" "/Account/LogOut" responded 302 in 0.6512 ms
+10/12/2021 18:32:17 +04:00 HTTP "DELETE" "/Account/Login?ReturnUrl=%2FAccount%2FLogOut" responded 404 in 0.0128 ms
+10/12/2021 18:32:29 +04:00 HTTP "DELETE" "/Account/LogOut" responded 302 in 0.5577 ms
+10/12/2021 18:32:29 +04:00 HTTP "DELETE" "/Account/Login?ReturnUrl=%2FAccount%2FLogOut" responded 404 in 0.0118 ms
+10/12/2021 18:33:46 +04:00 HTTP "DELETE" "/Account/LogOut" responded 401 in 23.0424 ms
+10/12/2021 18:34:07 +04:00 HTTP "POST" "/Account" responded 200 in 1979.2163 ms
+10/12/2021 18:34:27 +04:00 HTTP "DELETE" "/Account/LogOut" responded 401 in 77.0159 ms
+10/12/2021 18:35:09 +04:00 HTTP "POST" "/Account" responded 200 in 2748.4528 ms

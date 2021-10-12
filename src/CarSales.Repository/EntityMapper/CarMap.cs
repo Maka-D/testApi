@@ -12,17 +12,11 @@ namespace CarSales.Repository.EntityMapper
     public class CarMap :IEntityTypeConfiguration<Car>
     {
         public void Configure(EntityTypeBuilder<Car> builder)
-        {
-            builder.HasKey(x => x.Id)
-                .HasName("pk_CarId");
-
-            builder.Property(x => x.Id).ValueGeneratedOnAdd()
-                .HasColumnType("Int");
+        {            
 
             builder.Property(x => x.ClientId)
-                .HasColumnType("int")
                 .IsRequired();
-           
+
             builder.Property(x => x.Brand)
                 .HasColumnType("NVARCHAR(20)")
                 .IsRequired();

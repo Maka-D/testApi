@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarSales.Domain.Models
 {
-    public class Car :BaseEntity
+    public class Car : BaseEntity
     {
         public int ClientId { get; set; }
         public Client Client { get; set; }

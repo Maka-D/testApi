@@ -1,5 +1,6 @@
 ﻿using CarSales.Domain.Models;
 using CarSales.Repository.EntityMapper;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace CarSales.Repository
 {
-    public class AppDbContext :DbContext
+    public class AppDbContext : IdentityDbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
@@ -37,22 +38,22 @@ namespace CarSales.Repository
         public DbSet<Client> Clients { get; set; }
         public DbSet<Car> Cars { get; set; }
 
-        public async override Task<int> SaveChangesAsync(CancellationToken token=default)
+        public async override Task<int> SaveChangesAsync(CancellationToken token = default)
         {
             ChangeTracker.Entries<BaseEntity>()
                 .Where(e => e.State == EntityState.Deleted || e.State == EntityState.Modified || e.State == EntityState.Added)
                 .ToList()
                 .ForEach(e =>
                 {
-                    if(e.State == EntityState.Added)
+                    if (e.State == EntityState.Added)
                     {
                         e.Entity.CreationDate = DateTime.Now;
                     }
-                    else if(e.State == EntityState.Modified)
+                    else if (e.State == EntityState.Modified)
                     {
                         e.Entity.ModifiedDate = DateTime.Now;
                     }
-                    else if(e.State == EntityState.Deleted)
+                    else if (e.State == EntityState.Deleted)
                     {
                         e.State = EntityState.Modified;
                         e.Entity.DeletedAt = DateTime.Now;

@@ -3,7 +3,6 @@ using CarSales.Domain.Models;
 using CarSales.Repository.ErrorHandlerMiddleware;
 using CarSales.Services.ClientServices;
 using CarSales.Services.DTOs;
-using CarSales.TokenService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
@@ -17,37 +16,30 @@ namespace CarSales.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    [Authorize(AuthenticationSchemes ="Bearer")]
     public class ClientController : ControllerBase
     {
         
-        private readonly IUserService _clientService;
+        private readonly IClientService _userService;
 
-        public ClientController(IUserService clientService)
+        public ClientController(IClientService clientService)
         {
-            _clientService = clientService;
+            _userService = clientService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetClient(string IdentityNumber)
         {
-            var client = await _clientService.FindClient(IdentityNumber);
+            var client = await _userService.FindClient(IdentityNumber);
             return Ok(client);
 
         }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> RegisterClient(ClientInput client)
-        //{
-        //    var createdClient = await _clientService.AddClient(client);
-        //    return Ok(createdClient);
-        //}
 
         [HttpPut]
-        public async Task<ActionResult> EditClient(UserInput client)
+        public async Task<ActionResult> EditClient(ClientInput client)
         {
-            await _clientService.UpdateClient(client);
+            await _userService.UpdateClient(client);
             return Ok();
 
         }
@@ -55,7 +47,7 @@ namespace CarSales.Controllers
         [HttpDelete]
         public async Task<ActionResult> DeleteClient(string IdentityNumber)
         {
-            await _clientService.DeleteClient(IdentityNumber);
+            await _userService.DeleteClient(IdentityNumber);
             return Ok();
             
         }

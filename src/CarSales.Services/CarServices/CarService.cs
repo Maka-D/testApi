@@ -24,7 +24,8 @@ namespace CarSales.Services.CarServices
         private readonly ICacheService _cacheService;
 
         public CarService(CarRepository carRepository, IMapper mapper
-            ,ClientRepository clientRepository, ICacheService cacheService)
+            ,ClientRepository clientRepository
+            , ICacheService cacheService)
         {
             _carRepository = carRepository;
             _mapper = mapper;
@@ -66,7 +67,7 @@ namespace CarSales.Services.CarServices
             var car = await _carRepository.Get(x => x.VinCode == input.VinCode && x.DeletedAt == null);
             if (car == null)
                 throw new CarDoesNotExistsException();
-            if(client.Id == car.ClientId || car.IsSold == true)
+            if (client.Id == car.ClientId || car.IsSold == true)
             {
                 throw new CouldNotBuyCarException();
             }
@@ -85,7 +86,7 @@ namespace CarSales.Services.CarServices
         {
             var client = await _clientRepository.Get(x => x.IdentityNumber == input.IdentityNumber && x.DeletedAt == null);
             var car = await _carRepository.Get(x => x.VinCode == input.VinCode && x.DeletedAt == null);
-            if(car.ClientId != client.Id)
+            if (car.ClientId != client.Id)
             {
                 throw new CarDoesNotExistsException();
             }

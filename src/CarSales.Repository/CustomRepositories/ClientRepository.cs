@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace CarSales.Repository.CustomRepositories
 {
-    public class ClientRepository :Repository<Client>
+    public class ClientRepository : Repository<Client>
     {
         private readonly AppDbContext _appDbContext;
 
-        public ClientRepository(AppDbContext appDbContext) :base(appDbContext)
+        public ClientRepository(AppDbContext appDbContext) : base(appDbContext)
         {
             _appDbContext = appDbContext;
         }

@@ -5,6 +5,7 @@ using CarSales.Services.DTOs;
 using CarSales.Services.FluentValidation;
 using CarSales.Services.FluentValidator;
 using CarSales.Services.MapperService;
+using CarSales.Services.TokenService;
 using CarSales.Services.UserServices;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -21,12 +22,17 @@ namespace CarSales.Services
                 .AddFluentValidation(fv =>
                   fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly())
                 )
-                .AddTransient(typeof(IUserService), typeof(UserService))
+                .AddTransient(typeof(IClientService), typeof(ClientService))
                 .AddTransient(typeof(ICarService), typeof(CarService))
+                .AddTransient(typeof(IUserService), typeof(UserService))
+                .AddTransient<ITokenService, JwtTokenService>()
                 .AddAutoMapper(typeof(MapperProfile))
-                .AddScoped(typeof(IValidator<UserInput>), typeof(UserInputValidation))
+                .AddScoped(typeof(IValidator<ClientInput>), typeof(ClientInputValidation))
                 .AddScoped(typeof(IValidator<CarInput>), typeof(CarInputValidation))
                 .AddScoped(typeof(IValidator<DateInput>), typeof(DateInputValidation))
+                .AddScoped(typeof(IValidator<IdentifyingData>), typeof(IdentifyingDataValidation))
+                .AddScoped(typeof(IValidator<LogInInput>), typeof(LogInInputValidation))
+                .AddScoped(typeof(IValidator<RegistrationInput>), typeof(RegistrationInputValidation))
                 .AddSingleton(typeof(ICacheService), typeof(RedisCacheService))
                 .AddMemoryCache()
                 .AddStackExchangeRedisCache(options =>

@@ -15,6 +15,7 @@ namespace CarSales.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class CarController :ControllerBase
     {
         private readonly ICarService _carService;
@@ -25,7 +26,6 @@ namespace CarSales.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> RegisterCar(string IdentityNumber, CarInput car)
         {
             await _carService.AddCar(IdentityNumber, car);
@@ -34,7 +34,6 @@ namespace CarSales.Controllers
         }
 
         [HttpDelete]
-        [Authorize]
         public async Task<IActionResult> DeleteCar(IdentifyingData data)
         {
 
@@ -44,7 +43,6 @@ namespace CarSales.Controllers
         }
 
         [HttpPost("BuyCar")]
-        [Authorize]
         public async Task<IActionResult> BuyCar(IdentifyingData data)
         {
             await _carService.BuyCar(data);
@@ -52,6 +50,7 @@ namespace CarSales.Controllers
         }
 
         [HttpPost("SellingCarsList")]
+        [AllowAnonymous]
         public async Task<IActionResult> SellingCarsList(DateInput date)
         {
             var carsList = await _carService.SellingCarsList(date);
@@ -60,6 +59,7 @@ namespace CarSales.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Report()
         {
             var CarsListMonthly = await _carService.MonthlyReport();

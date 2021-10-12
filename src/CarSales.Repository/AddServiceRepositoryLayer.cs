@@ -20,6 +20,7 @@ namespace CarSales.Repository
                 .AddScoped(typeof(IRepository<Client>), typeof(Repository<Client>))
                 .AddScoped(typeof(IRepository<Car>), typeof(Repository<Car>))
                 .AddTransient(typeof(ClientRepository))
+                .AddTransient(typeof(UserRepository))
                 .AddTransient(typeof(CarRepository));
         }
     }

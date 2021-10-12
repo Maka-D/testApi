@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarSales.Services.FluentValidator
+namespace CarSales.Services.FluentValidation
 {
-    public class UserInputValidation : AbstractValidator<UserInput>
+    public class RegistrationInputValidation : AbstractValidator<RegistrationInput>
     {
-        public UserInputValidation()
+        public RegistrationInputValidation()
         {
             RuleFor(x => x.IdentityNumber)
                 .NotEmpty()
+                .WithMessage("Identity Number Is Required!")
                 .Length(11)
                 .WithMessage("Identity Number must contain 11 characters!");
 
@@ -37,14 +38,16 @@ namespace CarSales.Services.FluentValidator
             RuleFor(x => x.Password)
                 .NotEmpty()
                 .MaximumLength(20)
-                .Equal(x => x.RepeatPassword);
+                .MinimumLength(6)
+                .WithMessage("Password must contain");
 
             RuleFor(x => x.RepeatPassword)
                 .NotEmpty()
                 .MaximumLength(20)
+                .MinimumLength(6)
                 .Equal(x => x.Password);
 
-
         }
+
     }
 }
