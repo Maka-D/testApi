@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CarSales.Controllers
@@ -70,8 +71,8 @@ namespace CarSales.Controllers
             return BadRequest();
         }
 
-        [HttpPost("Refresh")]
-        public async Task<IActionResult> Refresh(string refreshToken)
+        [HttpPost("RefreshAccesToken")]
+        public async Task<IActionResult> RefreshAccesToken(string refreshToken)
         {
             var user = await _userService.GetUserByRefreshToken(refreshToken);
             var client = await _client.FindClient(user.UserName);
@@ -83,22 +84,22 @@ namespace CarSales.Controllers
 
         }
 
-        //[HttpDelete("LogOut")]
-        //[Authorize(AuthenticationSchemes = "Bearer")]
-        //public async Task<IActionResult> LogOut()
-        //{
-        //    var userIdentityNumber = HttpContext.User.Identity.Name;
+        [HttpDelete("RemoveRefreshToken")]
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        public async Task<IActionResult> RemoveRefreshToken()
+        {
+            var userIdentityNumber = User.FindFirst(ClaimTypes.NameIdentifier);
 
-        //    if (string.IsNullOrEmpty(userIdentityNumber))
-        //        return Unauthorized();
+            if (userIdentityNumber == null)
+                return Unauthorized();
 
-        //    var user = await _userManager.FindByNameAsync(userIdentityNumber);
+            var user = await _userManager.FindByNameAsync(userIdentityNumber.Value);
 
-        //    await _userManager.RemoveAuthenticationTokenAsync(user, "JwtBearer", "Refresh Token");
+            await _userManager.RemoveAuthenticationTokenAsync(user, "JwtBearer", "Refresh Token");
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-         
+
     }
 }

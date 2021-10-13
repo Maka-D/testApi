@@ -658,3 +658,9 @@ Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/
 10/12/2021 18:34:07 +04:00 HTTP "POST" "/Account" responded 200 in 1979.2163 ms
 10/12/2021 18:34:27 +04:00 HTTP "DELETE" "/Account/LogOut" responded 401 in 77.0159 ms
 10/12/2021 18:35:09 +04:00 HTTP "POST" "/Account" responded 200 in 2748.4528 ms
+10/13/2021 10:49:26 +04:00 HTTP "POST" "/Account" responded 200 in 3853.5837 ms
+10/13/2021 11:05:24 +04:00 HTTP "POST" "/Account" responded 200 in 5478.5647 ms
+10/13/2021 11:07:13 +04:00 HTTP "DELETE" "/Account/LogOut" responded 204 in 39055.0400 ms
+10/13/2021 11:16:48 +04:00 HTTP "POST" "/Account" responded 200 in 3948.2816 ms
+10/13/2021 11:17:09 +04:00 HTTP "DELETE" "/Account/RemoveRefreshToken" responded 204 in 252.6157 ms
+10/13/2021 11:17:34 +04:00 HTTP "GET" "/Client?IdentityNumber=96396396396" responded 200 in 38.2963 ms
