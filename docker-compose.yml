@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  carsales:
+    image: ${DOCKER_REGISTRY-}carsales
+    build:
+      context: .
+      dockerfile: src/CarSales/Dockerfile
+   
+    depends_on: 
+      - redis
+  redis: 
+     image: redis

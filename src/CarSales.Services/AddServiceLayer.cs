@@ -10,7 +10,11 @@ using CarSales.Services.UserServices;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using StackExchange.Redis;
+using System;
 using System.Reflection;
+using System.Text;
 
 namespace CarSales.Services
 {
@@ -36,7 +40,9 @@ namespace CarSales.Services
                 .AddSingleton(typeof(ICacheService), typeof(RedisCacheService))
                 .AddMemoryCache()
                 .AddStackExchangeRedisCache(options =>
-                { options.Configuration = "localhost:6379"; });
+                {
+                    options.Configuration = "localhost:6379";
+                });
         }
     }
 }
